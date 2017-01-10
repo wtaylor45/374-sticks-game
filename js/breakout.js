@@ -1,10 +1,9 @@
-
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update });
 
 function preload() {
 
-    game.load.atlas('breakout', 'assets/games/breakout/breakout.png', 'assets/games/breakout/breakout.json');
-    game.load.image('starfield', 'assets/misc/starfield.jpg');
+    game.load.atlas('breakout', '../assets/games/breakout/breakout.png', '../assets/games/breakout/breakout.json');
+    game.load.image('starfield', '../assets/misc/starfield.jpg');
 
 }
 
@@ -134,7 +133,7 @@ function ballLost () {
         ballOnPaddle = true;
 
         ball.reset(paddle.body.x + 16, paddle.y - 16);
-        
+
         ball.animations.stop();
     }
 
@@ -143,7 +142,7 @@ function ballLost () {
 function gameOver () {
 
     ball.body.velocity.setTo(0, 0);
-    
+
     introText.text = 'Game Over!';
     introText.visible = true;
 

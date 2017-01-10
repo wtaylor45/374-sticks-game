@@ -1,14 +1,21 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <script language="javascript" type="text/javascript" src="src/lib/phaser.min.js"></script>
+    <script language="javascript" type="text/javascript" src="phaser.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/common.css">
     <title>Sticks Game</title>
   </head>
-  <body bgcolor=white>
-	  <script src="breakout.js">
-	  </script>
+  <body>
+    <div id="move-buttons">
+      <button onsubmit="">1</button>
+      <button onsubmit="">2</button>
+      <button onsubmit="">3</button>
+    </div>
+    <div id="canvas">
+	     <script src="js/breakout.js"></script>
+    </div>
   </body>
 </html>

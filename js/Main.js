@@ -1,5 +1,5 @@
 /* global Phaser */
-var game = new Phaser.Game(800, 500, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(500, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 var gameOver = false;
 
 /*
@@ -26,7 +26,7 @@ function update(){
 
 
 function Player(){
-    this.takeTurn = function(){
+    this.takeTurn = function(choice){
         
     }
 }
@@ -44,6 +44,11 @@ function main(){
     var ai = new AI();
     
     while(!gameOver){
-        
+
+        ai.takeTurn();
+
     }
 }
+
+
+

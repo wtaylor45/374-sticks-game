@@ -1,5 +1,6 @@
 /* global Phaser */
 var game = new Phaser.Game(800, 500, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var gameOver = false;
 
 /*
  * Load objects (sprites, images, etc)
@@ -20,4 +21,29 @@ function create(){
 
 function update(){
     
+}
+
+
+
+function Player(){
+    this.takeTurn = function(){
+        
+    }
+}
+
+function AI(){
+    this.takeTurn = function(){
+        
+    }
+}
+
+
+
+function main(){
+    var player = new Player();
+    var ai = new AI();
+    
+    while(!gameOver){
+        
+    }
 }

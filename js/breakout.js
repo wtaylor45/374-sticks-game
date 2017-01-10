@@ -81,7 +81,7 @@ function create() {
 function update () {
 
     //  Fun, but a little sea-sick inducing :) Uncomment if you like!
-    // s.tilePosition.x += (game.input.speed.x / 2);
+     s.tilePosition.x += (game.input.speed.x / 2);
 
     paddle.x = game.input.x;
 

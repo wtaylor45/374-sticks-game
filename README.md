@@ -3,3 +3,4 @@ CSFG sticks game to demonstrate AI.
 Collaborators:
 Greg Mohler
 Will Taylor
+Lia Dawson

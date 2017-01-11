@@ -12,18 +12,30 @@ var turnsLeft = 3;
  *
  */
 function preload(){
+    game.load.spritesheet('button_1', 'assets/buttons/button_1.png', 100, 50);
+    game.load.spritesheet('button_2', 'assets/buttons/button_2.png', 100, 50);
+    game.load.spritesheet('button_3', 'assets/buttons/button_3.png', 100, 50);
     game.load.image('stick_key', '../assets/sprites/stick.png');
 }
 
 /*
- * Define global variables 
+ * Define global variables
  */
 var sticks;
+var button_1, button_2, button_3;
 
 function create(){
-    var graphics = game.add.graphics(0, 0); 
-    graphics.beginFill(0x00FFF0, 1);
-    graphics.drawCircle(200, 200, 25);
+    button_1 = game.add.button(0, game.height-100, 'button_1', function(){
+      console.log(1);
+    }, this, 0,1, 2);
+    button_2 = game.add.button(100, game.height-100, 'button_2', function(){
+      console.log(2);
+    }, this, 0, 1, 2);
+    button_3 = game.add.button(200, game.height-100, 'button_3', function(){
+      console.log(3);
+    }, this, 0, 1, 2);
+
+
     player = new Player();
     ai = new AI();
     //console.log(ai);
@@ -41,13 +53,12 @@ function create(){
 }
 
 function update(){
-    
+
 }
+
 function render(){
     game.debug.text("Sticks Left: " + sticksLeft, 32, 32);
 }
-
-
 
 function Player(){
     this.takeTurn = function(choice){
@@ -56,7 +67,6 @@ function Player(){
             gameOver = true;
             humanLost = true;
         }
-
     }
 }
 
@@ -69,7 +79,6 @@ function AI(){
             gameOver = true;
             humanLost = false;
         }
-
     }
 }
 function newGame(){
@@ -106,6 +115,3 @@ function main(){
     //game.time.events.add(Phaser.Timer.SECOND * 3, newGame(), this);
 
 }
-
-
-

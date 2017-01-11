@@ -1,6 +1,8 @@
 var moves;
 var map;
 function AI(){
+    this.takingTurn = false;
+
     this.init = function(){
         map = [];
         var vals = [33, 33, 34];
@@ -11,22 +13,19 @@ function AI(){
     }
 
     this.takeTurn = function(){
-        if(sticksLeft <= 0){
-            gameOver = true;
-            humanLost = false;
-        }
+        this.takingTurn = true;
 
         setTimeout(function(){
-            //Random pick from 1 to 3:
-            var num = Math.floor((Math.random() * 3) + 1);
-            if(num > sticksLeft){
-                num = sticksLeft;
-            }
-            removeSticks(num);
-            moves[sticksLeft] = num;
+          //Random pick from 1 to 3:
+          var num = Math.floor((Math.random() * 3) + 1);          
+          if(num > sticksLeft){
+              num = sticksLeft;
+          }
+          removeSticks(num);
+          moves[sticksLeft] = num;
+          
+          this.takingTurn = false;
         }, 1000);
-
-        turn = 1;
     }
 
     this.updateAI = function(){

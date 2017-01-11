@@ -16,7 +16,7 @@ function preload(){
  */
 var sticks;
 var button_1, button_2, button_3;
-var turn; //0 = AI turn, 1 = player turn
+var turn; //true = AI turn, false = player turn
 var gameOver;
 var ai;
 var player;
@@ -24,21 +24,21 @@ var sticksLeft;
 var playerWin;
 
 function create(){
-    button_1 = game.add.button(0, game.height-100, 'button_1', function(){
-      turn = 0;
-      removeSticks(1)
-    }, this, 0,1, 2);
-    button_2 = game.add.button(100, game.height-100, 'button_2', function(){
-      turn = 0;
-      removeSticks(2)
-    }, this, 0, 1, 2);
-    button_3 = game.add.button(200, game.height-100, 'button_3', function(){
-      turn = 0;
-      removeSticks(3)
-    }, this, 0, 1, 2);
-
     player = new Player();
     ai = new AI();
+
+    button_1 = game.add.button(0, game.height-100, 'button_1', function(){
+      removeStick(1);
+      ai.takeTurn();
+    }, this, 0,1, 2);
+    button_2 = game.add.button(100, game.height-100, 'button_2', function(){
+      removeStick(2);
+      ai.takeTurn();
+    }, this, 0, 1, 2);
+    button_3 = game.add.button(200, game.height-100, 'button_3', function(){
+      removeStick(3);
+      ai.takeTurn();
+    }, this, 0, 1, 2);
 
     // Create and show the stick objects
     sticks = game.add.group();
@@ -54,14 +54,9 @@ function create(){
 }
 
 function update(){
-    if(!gameOver){
-        if(turn == 0){
-            ai.takeTurn();
-        }
-
-        if(turn == 1){
-
-        }
+  if(!gameOver){
+    if(sticksLeft <= 0){
+        gameOver = true;
     }
 }
 
@@ -70,15 +65,28 @@ function render(){
 }
 
 function startGame(){
-    turn = 0;
-    gameOver = false;
-    sticksLeft = 21;
-    moves = {};
-    playerWin = false;
-    ai.init();
+  turn = true;
+  gameOver = false;
+  gameStarted = true;
+  moves = {};
+  playerWin = false;
+  ai.init();
+
+  sticksLeft = 21;
+  buttonsEnabled(false);
+  ai.takeTurn();
+}
+
+function buttonsEnabled(bool){
+  button_1.visible = bool;
+  button_2.visible = bool;
+  button_3.visible = bool;
 }
 
 function removeSticks(num){
     sticks.removeBetween(0, num - 1, true, true);
     sticksLeft -= num;
+
+    buttonsEnabled(turn);
+    turn = !turn;
 }

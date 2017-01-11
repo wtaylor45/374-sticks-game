@@ -2,10 +2,6 @@ function AI(){
     this.takingTurn = false;
 
     this.takeTurn = function(){
-        if(sticksLeft <= 0){
-            gameOver = true;
-        }
-
         this.takingTurn = true;
 
         setTimeout(function(){

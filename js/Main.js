@@ -54,6 +54,9 @@ function create(){
 
 function update(){
   if(!gameOver){
+    if(sticksLeft <= 0){
+        gameOver = true;
+    }
   }
 }
 

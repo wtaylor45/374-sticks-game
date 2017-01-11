@@ -9,7 +9,7 @@ var gameOver = false;
 function preload(){
     game.load.spritesheet('button_1', 'assets/buttons/button_1.png', 100, 50);
     game.load.spritesheet('button_2', 'assets/buttons/button_2.png', 100, 50);
-    //game.load.spritesheet('button_3', 'assets/buttons/button_3.png', 100, 50);
+    game.load.spritesheet('button_3', 'assets/buttons/button_3.png', 100, 50);
 }
 
 var button_1, button_2, button_3;
@@ -17,16 +17,22 @@ var button_1, button_2, button_3;
 function create(){
     game.stage.backgroundColor = '#fff';
 
-    button_1 = game.add.button(0, 500, 'button_1', null, this, 0,1, 2);
-    button_2 = game.add.button(100, 500, 'button_2', null, this, 0, 1, 2);
-    //button_3 = game.add.button(200, 500, 'button_3', null, this, 0, 1, 2);
+    moveButtons = game.add.group();
+
+    button_1 = game.add.button(0, game.height-100, 'button_1', function(){
+      console.log(1);
+    }, this, 0,1, 2);
+    button_2 = game.add.button(100, game.height-100, 'button_2', function(){
+      console.log(2);
+    }, this, 0, 1, 2);
+    button_3 = game.add.button(200, game.height-100, 'button_3', function(){
+      console.log(3);
+    }, this, 0, 1, 2);
 }
 
 function update(){
 
 }
-
-
 
 function Player(){
     this.takeTurn = function(choice){

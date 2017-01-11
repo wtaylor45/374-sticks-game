@@ -12,8 +12,13 @@ var turnsLeft = 3;
  *
  */
 function preload(){
-
+    game.load.image('stick_key', '../assets/sprites/stick.png');
 }
+
+/*
+ * Define global variables 
+ */
+var sticks;
 
 function create(){
     var graphics = game.add.graphics(0, 0); 
@@ -24,6 +29,15 @@ function create(){
     //console.log(ai);
     main();
 
+    // Create and show the stick objects
+    sticks = game.add.group();
+    var stick;
+
+    for (var y = 0; y < 3; y++){
+        for (var x = 0; x < 7; x++){
+            stick = sticks.create(40 + (x * 60), 50 + (y * 130), 'stick_key', null, 7*x + y +1);
+        }
+    }
 }
 
 function update(){
@@ -64,7 +78,9 @@ function newGame(){
     main();
 }
 
-
+function removeStick(num){
+    sticks.removeBetween(0, num - 1, true, true);
+}
 
 function main(){
     while(!gameOver){

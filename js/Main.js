@@ -29,7 +29,7 @@ function create(){
       console.log(1);
     }, this, 0,1, 2);
     button_2 = game.add.button(100, game.height-100, 'button_2', function(){
-      console.log(2);
+      removeStick(2)
     }, this, 0, 1, 2);
     button_3 = game.add.button(200, game.height-100, 'button_3', function(){
       console.log(3);

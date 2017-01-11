@@ -28,15 +28,15 @@ function create(){
     ai = new AI();
 
     button_1 = game.add.button(0, game.height-100, 'button_1', function(){
-      removeStick(1);
+      removeSticks(1);
       ai.takeTurn();
     }, this, 0,1, 2);
     button_2 = game.add.button(100, game.height-100, 'button_2', function(){
-      removeStick(2);
+      removeSticks(2);
       ai.takeTurn();
     }, this, 0, 1, 2);
     button_3 = game.add.button(200, game.height-100, 'button_3', function(){
-      removeStick(3);
+      removeSticks(3);
       ai.takeTurn();
     }, this, 0, 1, 2);
 
@@ -58,6 +58,7 @@ function update(){
     if(sticksLeft <= 0){
         gameOver = true;
     }
+  }
 }
 
 function render(){

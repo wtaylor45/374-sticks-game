@@ -21,6 +21,7 @@ var gameOver;
 var ai;
 var player;
 var sticksLeft;
+var playerWin;
 
 function create(){
     player = new Player();
@@ -49,7 +50,7 @@ function create(){
         }
     }
 
-    startGame();
+    startGame();    
 }
 
 function update(){
@@ -57,7 +58,6 @@ function update(){
     if(sticksLeft <= 0){
         gameOver = true;
     }
-  }
 }
 
 function render(){
@@ -68,6 +68,9 @@ function startGame(){
   turn = true;
   gameOver = false;
   gameStarted = true;
+  moves = {};
+  playerWin = false;
+  ai.init();
 
   sticksLeft = 21;
   buttonsEnabled(false);
@@ -80,7 +83,7 @@ function buttonsEnabled(bool){
   button_3.visible = bool;
 }
 
-function removeStick(num){
+function removeSticks(num){
     sticks.removeBetween(0, num - 1, true, true);
     sticksLeft -= num;
 

@@ -57,6 +57,7 @@ function update(){
   if(!gameOver){
     if(sticksLeft <= 0){
         gameOver = true;
+        ai.updateAI();
     }
   }
 }

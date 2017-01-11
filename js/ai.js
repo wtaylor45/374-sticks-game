@@ -4,10 +4,16 @@ function AI(){
     this.takingTurn = false;
 
     this.init = function(){
+        /*
         map = [];
         var vals = [33, 33, 34];
         for(var i = 21; i > 0; i--){
             map[i] = vals;
+        }*/
+        map = {};
+        var vals = [33, 33, 34];
+        for(var i = 21; i > 0; i--){
+            map[i.toString()] = vals;
         }
         console.log(map);
     }
@@ -21,8 +27,8 @@ function AI(){
           if(num > sticksLeft){
               num = sticksLeft;
           }
+          moves[sticksLeft.toString()] = num;
           removeSticks(num);
-          moves[sticksLeft] = num;
           
           this.takingTurn = false;
         }, 1000);
@@ -34,18 +40,23 @@ function AI(){
             change *= -1;
         }
         for(var i = 21; i > 0; i--){
-            if(typeof moves[i] == 'object'){
-                var vals = map[i];
+            console.log(i + ': ' + moves[i]);
+            if(i.toString() in map){
+                var cur_vals = map[i];
+                console.log(cur_vals);
                 var spot = moves[i];
-                for(var j in vals){
+                for(var j in cur_vals){
+                    var val = cur_vals[j];
                     if (j == spot-1){
-                        vals[j]+=change;
+                        cur_vals[j] = val + change;
                     }
                     else{
-                        vals[j]-=change/2;
+                        cur_vals[j] = val - change/2;
                     }
                 }
-                map[i] = vals;
+                map[i] = cur_vals;
+                cur_vals = [];
+                console.log(map[i]);
             }
         }
         console.log(map);

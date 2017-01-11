@@ -26,13 +26,13 @@ var button_1, button_2, button_3;
 
 function create(){
     button_1 = game.add.button(0, game.height-100, 'button_1', function(){
-      console.log(1);
+      removeStick(1)
     }, this, 0,1, 2);
     button_2 = game.add.button(100, game.height-100, 'button_2', function(){
       removeStick(2)
     }, this, 0, 1, 2);
     button_3 = game.add.button(200, game.height-100, 'button_3', function(){
-      console.log(3);
+      removeStick(3)
     }, this, 0, 1, 2);
 
 

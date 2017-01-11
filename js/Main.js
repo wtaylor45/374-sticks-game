@@ -1,8 +1,11 @@
 /* global Phaser */
-var game = new Phaser.Game(500, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(500, 600, Phaser.CANVAS, '', { preload: preload, create: create, update: update, render: render });
 var gameOver = false;
 var sticksLeft = 21;
 var humanLost;
+var ai;
+var player;
+var turnsLeft = 3;
 
 /*
  * Load objects (sprites, images, etc)
@@ -13,14 +16,21 @@ function preload(){
 }
 
 function create(){
-    
-    var player = new Player();
-    var ai = new AI();
+    var graphics = game.add.graphics(0, 0); 
+    graphics.beginFill(0x00FFF0, 1);
+    graphics.drawCircle(200, 200, 25);
+    player = new Player();
+    ai = new AI();
+    //console.log(ai);
+    main();
 
 }
 
 function update(){
     
+}
+function render(){
+    game.debug.text("Sticks Left: " + sticksLeft, 32, 32);
 }
 
 
@@ -59,20 +69,25 @@ function newGame(){
 function main(){
     while(!gameOver){
         //AI PSEUDO-THINKING:
-        game.time.events.add(Phaser.Timer.SECOND * 2, ai.takeTurn(), this);
+        //console.log(ai);
+        setInterval(ai.takeTurn(), 2000);
+        turnsLeft--;
+        if(turnsLeft <= 0){
+            gameOver = true;
+        }
 
         //WAIT FOR PLAYER TO CLICK A BUTTON:
 
 
         //WILL:
-        player.takeTurn(__buttonChoiceValue__)
+        //player.takeTurn(__buttonChoiceValue__)
 
 
     }
     //Display loser:
 
     //New Game:
-    game.time.events.add(Phaser.Timer.SECOND * 3, newGame(), this);
+    //game.time.events.add(Phaser.Timer.SECOND * 3, newGame(), this);
 
 }
 

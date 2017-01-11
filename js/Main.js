@@ -54,9 +54,12 @@ function create(){
 }
 
 function update(){
-  if(!gameOver){
+  if(gameOver == false){
     if(sticksLeft <= 0){
         gameOver = true;
+        if(!turn){
+            playerWin = true;
+        }
         ai.updateAI();
     }
   }

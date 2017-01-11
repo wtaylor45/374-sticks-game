@@ -21,19 +21,20 @@ var gameOver;
 var ai;
 var player;
 var sticksLeft;
+var playerWin;
 
 function create(){
     button_1 = game.add.button(0, game.height-100, 'button_1', function(){
       turn = 0;
-      removeStick(1)
+      removeSticks(1)
     }, this, 0,1, 2);
     button_2 = game.add.button(100, game.height-100, 'button_2', function(){
       turn = 0;
-      removeStick(2)
+      removeSticks(2)
     }, this, 0, 1, 2);
     button_3 = game.add.button(200, game.height-100, 'button_3', function(){
       turn = 0;
-      removeStick(3)
+      removeSticks(3)
     }, this, 0, 1, 2);
 
     player = new Player();
@@ -49,19 +50,19 @@ function create(){
         }
     }
 
-    startGame();
+    startGame();    
 }
 
 function update(){
-  if(!gameOver){
-    if(turn == 0){
-      ai.takeTurn();
-    }
+    if(!gameOver){
+        if(turn == 0){
+            ai.takeTurn();
+        }
 
-    if(turn == 1){
+        if(turn == 1){
 
+        }
     }
-  }
 }
 
 function render(){
@@ -69,14 +70,15 @@ function render(){
 }
 
 function startGame(){
-  turn = 0;
-  gameOver = false;
-  gameStarted = true;
-
-  sticksLeft = 21;
+    turn = 0;
+    gameOver = false;
+    sticksLeft = 21;
+    moves = {};
+    playerWin = false;
+    ai.init();
 }
 
-function removeStick(num){
+function removeSticks(num){
     sticks.removeBetween(0, num - 1, true, true);
     sticksLeft -= num;
 }

@@ -38,7 +38,7 @@ function create(){
       removeSticks(2);
       ai.takeTurn();
     }, this, 0, 1, 2);
-    button_3 = game.add.button(210, game.height-110, 'button_3', function(){
+    button_3 = game.add.button(55, game.height-55, 'button_3', function(){
       removeSticks(3);
       ai.takeTurn();
     }, this, 0, 1, 2);
@@ -60,6 +60,9 @@ function update(){
             playerWin = true;
         }
         ai.updateAI();
+
+        rematch_btn.visible = true;
+        moveButtonsEnabled(false);
     }
   }
 }
@@ -80,7 +83,7 @@ function createSticks(){
   }
 }
 
-function startGame(){
+function startGame(callback){
   turn = true;
   gameOver = false;
   gameStarted = true;
@@ -92,7 +95,10 @@ function startGame(){
   createSticks();
 
   moveButtonsEnabled(false);
+  rematch_btn.visible = false;
   ai.takeTurn();
+
+  if(callback) callback();
 }
 
 function rematch(){
@@ -105,6 +111,7 @@ function rematch(){
   createSticks();
 
   moveButtonsEnabled(false);
+  rematch_btn.visible = false;
   ai.takeTurn();
 }
 

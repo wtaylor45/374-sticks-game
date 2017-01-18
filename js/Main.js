@@ -50,7 +50,8 @@ function create(){
         }
     }
 
-    startGame();    
+    startGame(); 
+    buildHtmlTable('#excelDataTable');   
 }
 
 function update(){
@@ -94,4 +95,36 @@ function removeSticks(num){
 
     buttonsEnabled(turn);
     turn = !turn;
+}
+
+function buildHtmlTable(selector) {
+ var columns = addAllColumnHeaders(selector);
+
+  for (var i = 21; i > 0; i--) {
+    var row$ = $('<tr/>');
+    //for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+      for (var choices = 0; choices < columns.length; choices++){  
+        var cellValue = map[i][choices];
+        if (cellValue == null) cellValue = "";
+        row$.append($('<td/>').html(cellValue));
+      }
+    //}
+    $(selector).append(row$);
+  }
+}
+
+function addAllColumnHeaders(selector) {
+  var columnSet = ["# of sticks left", "% AI picks 1 stick", "% AI picks 2 sticks", "% AI picks 3 sticks"];
+  
+  var headerTr$ = $('<tr/>');
+
+  for (var i = 0; i < columnSet.length; i++) {
+
+    headerTr$.append($('<th/>').html(columnSet[i]));
+    
+  }
+  $(selector).append(headerTr$);
+  
+
+  return columnSet;
 }

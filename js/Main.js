@@ -55,14 +55,7 @@ function create(){
 function update(){
   if(gameOver == false){
     if(sticksLeft <= 0){
-        gameOver = true;
-        if(!turn){
-            playerWin = true;
-        }
-        ai.updateAI();
-
-        rematch_btn.visible = true;
-        moveButtonsEnabled(false);
+      endGame();
     }
   }
 }
@@ -83,12 +76,9 @@ function createSticks(){
   }
 }
 
-function startGame(callback){
-  turn = true;
-  gameOver = false;
-  gameStarted = true;
-  moves = {};
-  playerWin = false;
+function startGame(){
+  initVars();
+
   ai.init();
 
   sticksLeft = 21;
@@ -97,22 +87,35 @@ function startGame(callback){
   moveButtonsEnabled(false);
   rematch_btn.visible = false;
   ai.takeTurn();
+}
 
-  if(callback) callback();
+function endGame(){
+  gameOver = true;
+  if(!turn){
+      playerWin = true;
+  }
+  ai.updateAI();
+
+  rematch_btn.visible = true;
+  moveButtonsEnabled(false);
 }
 
 function rematch(){
+  initVars();
+  createSticks();
+
+  moveButtonsEnabled(false);
+  rematch_btn.visible = false;
+  ai.takeTurn();
+}
+
+function initVars(){
   turn = true;
   gameOver = false;
   moves = {};
   playerWin = false;
 
   sticksLeft = 21;
-  createSticks();
-
-  moveButtonsEnabled(false);
-  rematch_btn.visible = false;
-  ai.takeTurn();
 }
 
 function moveButtonsEnabled(bool){

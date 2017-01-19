@@ -59,6 +59,8 @@ function update(){
                 playerWin = true;
             }
             ai.updateAI();
+
+            endGame();
         }
       }
 

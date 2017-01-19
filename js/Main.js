@@ -50,7 +50,6 @@ function create(){
     sticks = game.add.group();
 
     startGame(); 
-    buildHtmlTable('#excelDataTable');   
 
 }
 
@@ -88,6 +87,10 @@ function startGame(){
 
   moveButtonsEnabled(false);
   rematch_btn.visible = false;
+
+  $('#excelDataTable').empty();
+  buildHtmlTable('#excelDataTable');
+
   ai.takeTurn();
 }
 

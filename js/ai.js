@@ -11,7 +11,7 @@ function AI(){
     }
 
     this.takeTurn = function(){
-        this.takingTurn = true;
+      quit_btn.inputEnabled = false;
 
         setTimeout(function(){
           //Random pick from 1 to 3:
@@ -22,7 +22,7 @@ function AI(){
           moves[sticksLeft.toString()] = num;
           removeSticks(num);
 
-          this.takingTurn = false;
+          quit_btn.inputEnabled = true;
         }, 1000);
     }
 

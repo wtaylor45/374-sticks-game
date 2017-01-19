@@ -25,6 +25,7 @@ var ai;
 var player;
 var sticksLeft;
 var playerWin;
+var simulation;
 
 function create(){
     player = new Player();
@@ -53,11 +54,18 @@ function create(){
 }
 
 function update(){
-  if(gameOver == false){
-    if(sticksLeft <= 0){
-      endGame();
+    if(!simulation){
+      if(gameOver == false){
+        if(sticksLeft <= 0){
+            gameOver = true;
+            if(!turn){
+                playerWin = true;
+            }
+            ai.updateAI();
+        }
+      }
+
     }
-  }
 }
 
 function render(){
@@ -118,6 +126,8 @@ function initVars(){
   gameOver = false;
   moves = {};
   playerWin = false;
+  simulation = true;
+  ai.init();
 
   sticksLeft = 21;
 }
@@ -128,8 +138,14 @@ function moveButtonsEnabled(bool){
   button_3.visible = bool;
 }
 
+/*
+ * Action of removing sticks, visual removal of sticks if simulate is false
+ */
 function removeSticks(num){
-    sticks.removeBetween(0, num - 1, true, true);
+    if(!simulation){
+        sticks.removeBetween(0, num - 1, true, true);
+    }
+
     sticksLeft -= num;
 
     moveButtonsEnabled(turn);

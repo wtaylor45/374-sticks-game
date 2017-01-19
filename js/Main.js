@@ -50,7 +50,6 @@ function create(){
     sticks = game.add.group();
 
     startGame(); 
-
 }
 
 function update(){

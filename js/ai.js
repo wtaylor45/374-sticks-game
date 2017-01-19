@@ -16,7 +16,7 @@ function AI(){
     }
 
     this.takeTurn = function(){
-        this.takingTurn = true;
+      quit_btn.inputEnabled = false;
 
         //Random pick from weighted map of choices
         var weighted = map[sticksLeft.toString()];
@@ -49,7 +49,7 @@ function AI(){
           moves[sticksLeft.toString()] = num;
           removeSticks(num);
 
-          this.takingTurn = false;
+          quit_btn.inputEnabled = true;
         }, lag);
     }
 

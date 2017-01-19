@@ -85,6 +85,9 @@ function createSticks(){
 }
 
 function startGame(){
+  //For alpha purposes, simulation is false
+  simulation = false;
+
   initVars();
 
   ai.init();
@@ -97,7 +100,6 @@ function startGame(){
 
   $('#excelDataTable').empty();
   buildHtmlTable('#excelDataTable');
-
   ai.takeTurn();
 }
 
@@ -126,7 +128,7 @@ function initVars(){
   gameOver = false;
   moves = {};
   playerWin = false;
-  simulation = true;
+  //simulation = true;
   ai.init();
 
   sticksLeft = 21;

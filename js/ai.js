@@ -11,32 +11,28 @@ function AI(){
             map[i.toString()] = [i, 33, 33, 34];
         }
         //Hard code rules, cannot choose more sticks than are available
-        map['2'] = [50, 50, 0];
-        map['1'] = [100, 0, 0];
+        map['2'] = [2, 50, 50, 0];
+        map['1'] = [1, 100, 0, 0];
     }
 
     this.takeTurn = function(){
         this.takingTurn = true;
-        /*
-        //Random pick from 1 to 3:
-        var num = Math.floor((Math.random() * 3) + 1);
-        if(num > sticksLeft){
-            num = sticksLeft;
-        }
-        */
 
         //Random pick from weighted map of choices
         var weighted = map[sticksLeft.toString()];
         var randNum = Math.floor((Math.random() * 100) + 1);
         var num;
-        if(randNum < weighted[0]){
+        if(randNum <= weighted[1]){
             num = 1;
         }
-        else if(weighted[0] < randNum < weighted[1]){
+        else if(weighted[1] <= randNum < (weighted[1]+weighted[2])){
             num = 2;
         }
-        else{
+        else if((weighted[1]+weighted[2]) <= randNum < (weighted[1]+weighted[2]+weighted[3])){
             num = 3;
+        }
+        else{
+            console.log('ERROR: Rand num not in range of percentiles')
         }
 
         if(num > sticksLeft){
@@ -74,16 +70,16 @@ function AI(){
                 var spot = moves[key];
                 for(var j=1; j<cur_vals.length; j++){
                     var val = cur_vals[j];
-                    if (j == spot-1){
+                    if (j == spot){
                         cur_vals[j] = val + change;
                     }
                     else{
                         cur_vals[j] = val - change/2;
                     }
                 }
-                map[i] = cur_vals;
+                map[key] = cur_vals;
                 cur_vals = [];
-                console.log(map[i]);
+                console.log(map[key]);
             }
         }
         console.log(map);

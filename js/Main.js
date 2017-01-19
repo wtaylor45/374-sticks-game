@@ -58,7 +58,6 @@ function update(){
             if(!turn){
                 playerWin = true;
             }
-            ai.updateAI();
 
             endGame();
         }
@@ -128,7 +127,6 @@ function initVars(){
   moves = {};
   playerWin = false;
   //simulation = true;
-  ai.init();
 
   sticksLeft = 21;
 }

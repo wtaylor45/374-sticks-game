@@ -22,13 +22,15 @@ function AI(){
         var weighted = map[sticksLeft.toString()];
         var randNum = Math.floor((Math.random() * 100) + 1);
         var num;
+
+        console.log('ranges: ', weighted[1], ', ', (weighted[1]+weighted[2]), ', ', (weighted[1]+weighted[2]+weighted[3]), ', num is:', randNum);
         if(randNum <= weighted[1]){
             num = 1;
         }
-        else if(weighted[1] <= randNum < (weighted[1]+weighted[2])){
+        else if((weighted[1] <= randNum) && (randNum < (weighted[1]+weighted[2]))){
             num = 2;
         }
-        else if((weighted[1]+weighted[2]) <= randNum < (weighted[1]+weighted[2]+weighted[3])){
+        else if(((weighted[1]+weighted[2]) <= randNum) && (randNum < (weighted[1]+weighted[2]+weighted[3]))){
             num = 3;
         }
         else{

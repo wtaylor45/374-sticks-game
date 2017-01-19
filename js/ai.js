@@ -6,7 +6,7 @@ function AI(){
     this.init = function(){
         map = {};
         for(var i = 21; i > 0; i--){
-            map[i.toString()] = [33, 33, 34];
+            map[i.toString()] = [i, 33, 33, 34];
         }
     }
 
@@ -32,14 +32,14 @@ function AI(){
             change *= -1;
         }
         var keys = Object.keys(moves);
-        for(var i in keys){
+        for(var i=1; i<keys.length; i++){
             var key = keys[i]
             if(key in map){
                 console.log(key + ":" + moves[key]);
                 var cur_vals = map[key];
                 console.log(cur_vals);
                 var spot = moves[key];
-                for(var j in cur_vals){
+                for(var j=1; j<cur_vals.length; j++){
                     var val = cur_vals[j];
                     if (j == spot-1){
                         cur_vals[j] = val + change;
@@ -54,5 +54,8 @@ function AI(){
             }
         }
         console.log(map);
+        $('#excelDataTable').empty();
+        buildHtmlTable('#excelDataTable');
+
     }
 }

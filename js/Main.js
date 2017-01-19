@@ -167,6 +167,9 @@ function addAllColumnHeaders(selector) {
 }
 
 function takeTurn(num){
+  if(num > sticksLeft){
+      num = sticksLeft;
+  }
   removeSticks(num);
-  ai.takeTurn();
+  if(sticksLeft > 0) ai.takeTurn();
 }

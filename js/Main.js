@@ -64,10 +64,35 @@ function update(){
       }
 
     }
+
 }
 
 function render(){
-    game.debug.text("Sticks Left: " + sticksLeft, 32, 32);
+    game.debug.text("Sticks Left: " + sticksLeft, 32, 32,"#fff","16px Arial");
+    if(!turn && gameOver == false){
+      if(stickschosen == 1){
+        game.debug.text("Nathaniel chose " + stickschosen + " stick.", 150, 450,"#fff","16px Arial");
+      }
+      else{
+        game.debug.text("Nathaniel chose " + stickschosen + " sticks.", 150, 450,"#fff","16px Arial");
+      }
+      game.debug.text("Now you choose.", 150, 480,"#fff","16px Arial");
+    }
+    if(gameOver == true){
+      if(playerWin == true){
+        game.debug.text("You win!", 200, 300,"#fff","32px Arial");
+      }
+      else{
+        game.debug.text("Nathaniel wins", 150, 300, "#fff","32px Arial");
+      }
+      
+    }
+    if(turn && gameOver == false){
+      game.debug.text("Nathaniel is thinking...", 170, 450,"#fff","16px Arial");
+
+    }
+
+
 }
 
 function createSticks(){

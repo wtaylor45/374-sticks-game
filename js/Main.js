@@ -85,7 +85,7 @@ function render(){
       else{
         game.debug.text("Nathaniel wins", 150, 300, "#fff","32px Arial");
       }
-      
+
     }
     if(turn && gameOver == false){
       game.debug.text("Nathaniel is thinking...", 170, 450,"#fff","16px Arial");
@@ -186,6 +186,7 @@ function buildHtmlTable(selector) {
         var cellValue = map[i][choices];
         if (cellValue == null) cellValue = "";
         row$.append($('<td/>').html(cellValue));
+        if(map[i][0] in moves) row$.css('background-color', '#faa')
       }
     //}
     $(selector).append(row$);

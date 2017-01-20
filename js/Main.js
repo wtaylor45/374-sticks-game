@@ -186,7 +186,10 @@ function buildHtmlTable(selector) {
         var cellValue = map[i][choices];
         if (cellValue == null) cellValue = "";
         row$.append($('<td/>').html(cellValue));
-        if(map[i][0] in moves) row$.css('background-color', '#faa')
+        if(map[i][0] in moves){
+          if(playerWin) row$.css('background-color', '#faa');
+          else row$.css('background-color', '#afa');
+        }
       }
     //}
     $(selector).append(row$);

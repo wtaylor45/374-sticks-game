@@ -17,6 +17,7 @@ function AI(){
 
     this.takeTurn = function(){
       quit_btn.inputEnabled = false;
+      console.log('AI taking turn: ', sticksLeft);
 
         //Random pick from weighted map of choices
         var weighted = map[sticksLeft.toString()];
@@ -62,7 +63,7 @@ function AI(){
         }
 
         var keys = Object.keys(moves);
-        for(var i=1; i<keys.length; i++){
+        for(var i in keys){
             var key = keys[i]
             //If key is in map (should always be true) update map values
             if(key in map){

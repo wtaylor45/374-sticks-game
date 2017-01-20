@@ -1,5 +1,6 @@
 var moves;
 var map;
+var stickschosen;
 function AI(){
     this.takingTurn = false;
     this.floor = 1;
@@ -28,16 +29,16 @@ function AI(){
         if(randNum <= weighted[1]){
             num = 1;
         }
-        else if((weighted[1] <= randNum) && (randNum < (weighted[1]+weighted[2]))){
+        else if((weighted[1] < randNum) && (randNum <= (weighted[1]+weighted[2]))){
             num = 2;
         }
-        else if(((weighted[1]+weighted[2]) <= randNum) && (randNum < (weighted[1]+weighted[2]+weighted[3]))){
+        else if(((weighted[1]+weighted[2]) < randNum) && (randNum <= (weighted[1]+weighted[2]+weighted[3]))){
             num = 3;
         }
         else{
             console.log('ERROR: Rand num not in range of percentiles')
         }
-
+        stickschosen = num;
         if(num > sticksLeft){
             num = sticksLeft;
             console.log('ERROR: Impossible move chosen, changed');
@@ -46,7 +47,7 @@ function AI(){
         //Create a lag time if this is not simulation mode
         var lag = 0;
         if(!simulation){
-            lag = 1000
+            lag = 2500
         }
         setTimeout(function(){
           moves[sticksLeft.toString()] = num;

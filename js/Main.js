@@ -1,3 +1,4 @@
+// ALPHA VERSION FINAL 
 var game = new Phaser.Game(500, 600, Phaser.CANVAS, '', { preload: preload, create: create, update: update, render: render });
 
 /*

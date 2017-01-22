@@ -1,4 +1,4 @@
-// ALPHA VERSION FINAL 
+// ALPHA VERSION FINAL
 var game = new Phaser.Game(500, 600, Phaser.CANVAS, '', { preload: preload, create: create, update: update, render: render });
 
 /*
@@ -11,7 +11,7 @@ function preload(){
     game.load.spritesheet('button_3', 'assets/buttons/button_3.png', 100, 50);
     game.load.spritesheet('rematch', 'assets/buttons/rematch_button.png', 100, 50);
     game.load.spritesheet('quit', 'assets/buttons/button_quit.png', 100, 50);
-    game.load.image('stick_key', '../assets/sprites/stick.png');
+    game.load.image('stick_key', 'assets/sprites/stick.png');
 }
 
 /*

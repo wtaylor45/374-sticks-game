@@ -1,6 +1,4 @@
-var moves;
-var map;
-var stickschosen;
+
 
 function AI(){
     this.takingTurn = false;

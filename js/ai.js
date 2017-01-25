@@ -18,9 +18,6 @@ function AI(){
 
     this.takeTurn = function(){
       quit_btn.inputEnabled = false;
-      if(simulation){
-        console.log('Simulation mode');
-      }
       console.log('AI taking turn: ', sticksLeft);
 
         //Random pick from weighted map of choices
@@ -39,12 +36,12 @@ function AI(){
             num = 3;
         }
         else{
-            //console.log('ERROR: Rand num not in range of percentiles')
+            console.log('ERROR: Rand num not in range of percentiles')
         }
         stickschosen = num;
         if(num > sticksLeft){
             num = sticksLeft;
-            //console.log('ERROR: Impossible move chosen, changed');
+            console.log('ERROR: Impossible move chosen, changed');
         }
 
         if(!simulation){
@@ -70,19 +67,16 @@ function AI(){
         }
 
         var keys = Object.keys(moves);
-        console.log(keys);
         for(var i in keys){
             var key = keys[i]
             //If key is in map (should always be true) update map values
             if(key in map){
                 console.log(key + ":" + moves[key]);
                 var cur_vals = map[key];
-                console.log(cur_vals);
                 var spot = moves[key];
 
                 map[key] = this.calculateVals(cur_vals, spot, change);
                 cur_vals = [];
-                console.log(map[key]);
             }
         }
         //console.log(map);
@@ -98,7 +92,6 @@ function AI(){
     //move is the number (1, 2, or 3) that was chosen by the AI
     //change is the max change value
     this.calculateVals = function(start_vals, move, change){
-        //console.log('inside function');
         var new_vals = start_vals;
 
         //Calculate actual change
@@ -131,7 +124,6 @@ function AI(){
             if( (start_vals[count] - r_change/div) > this.floor){
                 if( (start_vals[count] - r_change/div) < this.ceiling){
                     new_vals[count] = Math.floor((start_vals[count] - r_change/div)*100)/100;
-                    //console.log('Value at ', count, ' is: ', new_vals[count]);
                 }
                 else{
                     new_vals[count] = this.ceiling;
@@ -149,7 +141,7 @@ function AI(){
     }
 
     this.trainAI = function(num){
-        //console.log('Simulations left: ', num);
+        console.log('Simulations left: ', num);
         initVars();
         if(num <= 0){
             simulation = false;
@@ -157,13 +149,6 @@ function AI(){
         else{
             this.simulateGame();
         }
-
-        /*for(var i = 0; i < num; i++){
-            console.log('SIMULATION #', i+1);
-            this.simulateGame();
-            //Reset variables
-            initVars();
-        }*/
     }
 
     this.simulateGame = function(){
@@ -181,6 +166,8 @@ function AI(){
                     num = sticksLeft;
                 }
                 removeSticks(num);
+            }else{
+              playerWin = true;
             }
         }
 

@@ -53,7 +53,7 @@ function startGame(){
   ai.trainAI(simGames);
   var endTime = new Date().getTime() / 1000;
   var simTime = endTime - startTime;
-  console.log('Simulation took', simTime, 'seconds');
+  console.log('%c Simulation took ' + simTime + ' seconds', 'background: #222; color: #fff');
 
   console.log('Done w simulation');
   ai.takeTurn();

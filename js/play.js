@@ -21,10 +21,12 @@ var playState = {
 	    // Create and show the stick objects
 	    sticks = game.add.group();
 
+
 	    slider = game.add.sprite(10,525, 'slider');
     	slider_arrow = game.add.sprite(35,528, 'slider_arrow');
     	slider_arrow.inputEnabled = true;
-    	slider_arrow.input.enableDrag(false, false, false, 255, null, slider);
+    	bounds = new Phaser.Rectangle(0, 525, 325, 50);
+    	slider_arrow.input.enableDrag(false, false, false, 255, bounds, null);
     	slider_arrow.input.setDragLock(true, false);
     	slider_arrow.input.enableSnap(17.5, 17.5, true, true);
 

@@ -13,6 +13,7 @@ var player;
 var sticksLeft;
 var playerWin;
 var simulation;
+var simGames;
 
 //AI globals:
 var moves;
@@ -34,7 +35,7 @@ function createSticks(){
 
 function startGame(){
   //For alpha purposes, simulation is false
-  simulation = false;
+  simulation = true;
 
   initVars();
 
@@ -48,6 +49,10 @@ function startGame(){
 
   $('#excelDataTable').empty();
   buildHtmlTable('#excelDataTable');
+
+  ai.trainAI(simGames);
+
+  console.log('Done w simulation');
   ai.takeTurn();
 }
 
@@ -76,7 +81,6 @@ function initVars(){
   gameOver = false;
   moves = {};
   playerWin = false;
-  //simulation = true;
 
   sticksLeft = 21;
 }

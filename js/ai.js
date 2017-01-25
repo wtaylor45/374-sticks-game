@@ -18,6 +18,9 @@ function AI(){
 
     this.takeTurn = function(){
       quit_btn.inputEnabled = false;
+      if(simulation){
+        console.log('Simulation mode');
+      }
       console.log('AI taking turn: ', sticksLeft);
 
         //Random pick from weighted map of choices
@@ -25,7 +28,7 @@ function AI(){
         var randNum = Math.floor((Math.random() * 100) + 1);
         var num;
 
-        console.log('ranges: ', weighted[1], ', ', (weighted[1]+weighted[2]), ', ', (weighted[1]+weighted[2]+weighted[3]), ', num is:', randNum);
+        //console.log('ranges: ', weighted[1], ', ', (weighted[1]+weighted[2]), ', ', (weighted[1]+weighted[2]+weighted[3]), ', num is:', randNum);
         if(randNum <= weighted[1]){
             num = 1;
         }
@@ -36,25 +39,28 @@ function AI(){
             num = 3;
         }
         else{
-            console.log('ERROR: Rand num not in range of percentiles')
+            //console.log('ERROR: Rand num not in range of percentiles')
         }
         stickschosen = num;
         if(num > sticksLeft){
             num = sticksLeft;
-            console.log('ERROR: Impossible move chosen, changed');
+            //console.log('ERROR: Impossible move chosen, changed');
         }
 
-        //Create a lag time if this is not simulation mode
-        var lag = 0;
         if(!simulation){
-            lag = 2500
+            lag = 1500;
+            setTimeout(function(){
+                moves[sticksLeft.toString()] = num;
+                removeSticks(num);
+                quit_btn.inputEnabled = true;
+            }, lag)
         }
-        setTimeout(function(){
-          moves[sticksLeft.toString()] = num;
-          removeSticks(num);
+        else{
+            moves[sticksLeft.toString()] = num;
+            removeSticks(num);
+        }
 
-          quit_btn.inputEnabled = true;
-        }, lag);
+        this.takingTurn = false;
     }
 
     this.updateAI = function(){
@@ -64,6 +70,7 @@ function AI(){
         }
 
         var keys = Object.keys(moves);
+        console.log(keys);
         for(var i in keys){
             var key = keys[i]
             //If key is in map (should always be true) update map values
@@ -78,17 +85,20 @@ function AI(){
                 console.log(map[key]);
             }
         }
-        console.log(map);
+        //console.log(map);
         $('#excelDataTable').empty();
         buildHtmlTable('#excelDataTable');
 
+        if(simulation){
+           this.trainAI(simGames--); 
+        }    
     }
 
     //start_vals is array from map for a specific sticksLeft values
     //move is the number (1, 2, or 3) that was chosen by the AI
     //change is the max change value 
     this.calculateVals = function(start_vals, move, change){
-        console.log('inside function');
+        //console.log('inside function');
         var new_vals = start_vals;
 
         //Calculate actual change
@@ -121,7 +131,7 @@ function AI(){
             if( (start_vals[count] - r_change/div) > this.floor){
                 if( (start_vals[count] - r_change/div) < this.ceiling){
                     new_vals[count] = Math.floor((start_vals[count] - r_change/div)*100)/100;
-                    console.log('Value at ', count, ' is: ', new_vals[count]);
+                    //console.log('Value at ', count, ' is: ', new_vals[count]);
                 }
                 else{
                     new_vals[count] = this.ceiling;
@@ -139,21 +149,33 @@ function AI(){
     }
 
     this.trainAI = function(num){
-        for(var i = 0; i < num; i++){
+        //console.log('Simulations left: ', num);
+        initVars();
+        if(num <= 0){ 
+            simulation = false;
+        }
+        else{
+            this.simulateGame();
+        }
+
+        /*for(var i = 0; i < num; i++){
+            console.log('SIMULATION #', i+1);
             this.simulateGame();
             //Reset variables
             initVars();
-        }
+        }*/
     }
 
     this.simulateGame = function(){
 
         while(sticksLeft > 0){
             //AI takes turn
+            this.takingTurn = true;
             this.takeTurn();
 
             //Next turn is random number between 1 and 3 if not game over
             if(sticksLeft > 0){
+                console.log('RNG Turn');
                 var num = Math.floor((Math.random() * 3) + 1);
                 if(num > sticksLeft){
                     num = sticksLeft;
@@ -161,6 +183,7 @@ function AI(){
                 removeSticks(num);
             }
         }
+
 
         this.updateAI();
     }

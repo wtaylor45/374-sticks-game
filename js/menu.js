@@ -13,6 +13,7 @@ var menuState = {
 	},
 
 	start: function() {
+		simGames = 100;
 		game.state.start('play');
 	}
 };

@@ -72,18 +72,6 @@ function AI(){
                 var cur_vals = map[key];
                 console.log(cur_vals);
                 var spot = moves[key];
-                /*
-                for(var j=1; j<cur_vals.length; j++){
-                    var val = cur_vals[j];
-                    if (j == spot){
-                        cur_vals[j] = val + change;
-                    }
-                    else{
-                        cur_vals[j] = val - change/2;
-                    }
-                }
-                */
-
 
                 map[key] = this.calculateVals(cur_vals, spot, change);
                 cur_vals = [];
@@ -108,15 +96,6 @@ function AI(){
         
         var check = (change > 0) ? this.ceiling : this.floor;
         
-        /*var check, opp_check;
-        if(change > 0){
-            check = this.ceiling;
-            opp_check = this.floor;
-        }
-        else{
-            check = this.floor;
-            opp_check = this.ceiling;
-        }*/
 
         //The change is the lower of either the set change value or the maximum that 
         //can be added or subtracted without making the percentage outside of the floor:ceiling bounds

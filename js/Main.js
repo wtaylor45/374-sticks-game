@@ -34,7 +34,6 @@ function createSticks(){
 }
 
 function startGame(){
-  //For alpha purposes, simulation is false
   simulation = true;
 
   initVars();
@@ -50,7 +49,11 @@ function startGame(){
   $('#excelDataTable').empty();
   buildHtmlTable('#excelDataTable');
 
+  var startTime = new Date().getTime() / 1000;
   ai.trainAI(simGames);
+  var endTime = new Date().getTime() / 1000;
+  var simTime = endTime - startTime;
+  console.log('Simulation took', simTime, 'seconds at an average of', );
 
   console.log('Done w simulation');
   ai.takeTurn();

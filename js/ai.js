@@ -90,24 +90,24 @@ function AI(){
         buildHtmlTable('#excelDataTable');
 
         if(simulation){
-           this.trainAI(simGames--); 
-        }    
+           this.trainAI(simGames--);
+        }
     }
 
     //start_vals is array from map for a specific sticksLeft values
     //move is the number (1, 2, or 3) that was chosen by the AI
-    //change is the max change value 
+    //change is the max change value
     this.calculateVals = function(start_vals, move, change){
         //console.log('inside function');
         var new_vals = start_vals;
 
         //Calculate actual change
         //If the AI won, check against the ceiling, otherwise against the floor
-        
-        var check = (change > 0) ? this.ceiling : this.floor;
-        
 
-        //The change is the lower of either the set change value or the maximum that 
+        var check = (change > 0) ? this.ceiling : this.floor;
+
+
+        //The change is the lower of either the set change value or the maximum that
         //can be added or subtracted without making the percentage outside of the floor:ceiling bounds
         var r_change = (Math.abs(change) < Math.abs(check - start_vals[move])) ? change : (check - start_vals[move]);
         var total = 0;
@@ -151,7 +151,7 @@ function AI(){
     this.trainAI = function(num){
         //console.log('Simulations left: ', num);
         initVars();
-        if(num <= 0){ 
+        if(num <= 0){
             simulation = false;
         }
         else{

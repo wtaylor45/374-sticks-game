@@ -2,8 +2,6 @@
 var instructionState = {
 	
 	create: function() {
-		/*var nameLabel1 = game.add.text(40, 40, 'Training Ground', 
-			{font: '25px Arial', fill: '#ffffff' });*/
 		var title = game.add.sprite(game.width/2 - game.cache.getImage('title').width/2 ,80, 'title');
 		var nameLabel2 = game.add.text(game.width/2 - game.cache.getImage('title').width/2 + 20, 180, 'Instructions:', 
 			{font: '25px Arial', fill: '#ffffff'});
@@ -13,8 +11,6 @@ var instructionState = {
 			"\nWatch how the AI\'\s (Nathaniel\'\s) picks change " +
 			"\nthe more games he plays.";
 		var text = game.add.text(game.width/2 - game.cache.getImage('title').width/2 + 20, 220, instructionParag,  { font: "18px Arial", fill: '#ffffff'});
-		//var nameLabel3 = game.add.text(40, 300, 'Press \'w\' to go back to the menu.', 
-			//{font: '25px Arial', fill: '#ffffff' });
 		var menu_button = game.add.button(game.width/2 - game.cache.getImage('menu').width/6, 390, 'menu', this.start, this, 0, 1, 2);
 
 	},

@@ -19,6 +19,7 @@ var preplayState = {
 
 	},
 
+/*
 	train1: function(){
 		var startTime = new Date().getTime() / 1000;
   		ai.trainAI(1);
@@ -46,7 +47,7 @@ var preplayState = {
   		Logger.debug('Done w simulation');
 
 	},
-
+*/
 	play: function(){
 		game.state.start('play');
 	}

@@ -112,8 +112,8 @@ function buildHtmlTable(selector) {
         if (cellValue == null) cellValue = "";
         row$.append($('<td/>').html(cellValue));
         if(map[i][0] in moves){
-          if(playerWin) row$.css('background-color', '#faa');
-          else row$.css('background-color', '#afa');
+          if(playerWin) row$.css('background-color', '#ff0000');
+          else row$.css('background-color', '#149800');
         }
       }
     //}
@@ -122,7 +122,7 @@ function buildHtmlTable(selector) {
 }
 
 function addAllColumnHeaders(selector) {
-  var columnSet = ["# of sticks left", "% AI picks 1 stick", "% AI picks 2 sticks", "% AI picks 3 sticks"];
+  var columnSet = ["# of sticks left", "1 stick", "2 sticks", "3 sticks"];
 
   var headerTr$ = $('<tr/>');
 

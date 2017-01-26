@@ -12,8 +12,10 @@ var ai;
 var player;
 var sticksLeft;
 var playerWin;
-var simulation;
-var simGames;
+var simulation; //boolean tracking whether simulation is occuring
+var simGames; //will always be 0 after the simulation has run
+var gamesPlayed; //Keeps track of how many games the AI has played
+var simulated; //true = the simulate button was just pressed
 
 //AI globals:
 var moves;
@@ -35,6 +37,8 @@ function createSticks(){
 
 function startGame(){
   simulation = true;
+  gamesPlayed = 0;
+  simulated = false;
 
   initVars();
 
@@ -45,6 +49,7 @@ function startGame(){
 
   moveButtonsEnabled(false);
   rematch_btn.visible = false;
+  simulate_btn.visible = false;
 
   $('#excelDataTable').empty();
   buildHtmlTable('#excelDataTable');
@@ -58,6 +63,7 @@ function startGame(){
 
   Logger.debug('Done w simulation');
   
+  initVars();
   ai.takeTurn();
 }
 
@@ -71,6 +77,7 @@ function endGame(){
   ai.updateAI();
 
   rematch_btn.visible = true;
+  simulate_btn.visible = true;
   moveButtonsEnabled(false);
 }
 
@@ -80,10 +87,22 @@ function rematch(){
 
   moveButtonsEnabled(false);
   rematch_btn.visible = false;
+  simulate_btn.visible = false;
   ai.takeTurn();
 }
 
+function simulate(){
+    simulate_btn.visible = false;
+    simulation = true;
+    simGames = 10;
+    ai.trainAI(simGames);
+    simulate_btn.visible = true;
+    gameOver = true;
+    simulated = true;
+}
+
 function initVars(){
+  simulated = false;
   turn = true;
   gameOver = false;
   moves = {};
@@ -104,11 +123,9 @@ function moveButtonsEnabled(bool){
 function removeSticks(num){
     if(!simulation){
         sticks.removeBetween(0, num - 1, true, true);
+        moveButtonsEnabled(turn);
     }
-
     sticksLeft -= num;
-
-    moveButtonsEnabled(turn);
     turn = !turn;
 }
 

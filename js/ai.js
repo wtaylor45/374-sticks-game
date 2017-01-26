@@ -83,8 +83,10 @@ function AI(){
         $('#excelDataTable').empty();
         buildHtmlTable('#excelDataTable');
 
+        gamesPlayed++;
+
         if(simulation){
-           this.trainAI(simGames--);
+           this.trainAI(--simGames);
         }
     }
 
@@ -142,11 +144,13 @@ function AI(){
 
     this.trainAI = function(num){
         Logger.debug('Simulations left: ', num);
-        initVars();
+        
         if(num <= 0){
+            quit_btn.inputEnabled = true;
             simulation = false;
         }
         else{
+            initVars();
             this.simulateGame();
         }
     }
@@ -165,10 +169,8 @@ function AI(){
             //Next turn is random number between 1 and 3 if not game over
             if(sticksLeft > 0){
                 Logger.debug('RNG Turn');
-                var num = Math.floor((Math.random() * 3) + 1);
-                if(num > sticksLeft){
-                    num = sticksLeft;
-                }
+                var limit = (sticksLeft < 3) ? sticksLeft : 3;
+                var num = Math.floor((Math.random() * limit) + 1);
                 removeSticks(num);
             }
 

@@ -156,5 +156,6 @@ function takeTurn(num){
 
 function goToMenu(){
   game.state.start('menu');
+  $('#excelDataTable').html("");
 }
 

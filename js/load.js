@@ -39,7 +39,7 @@ var loadState = {
 
 		sticksLeft = 21;
 
-		$('#excelDataTable').empty();
-		buildHtmlTable('#excelDataTable');
+		/*$('#excelDataTable').empty();
+		buildHtmlTable('#excelDataTable');*/
 	},
 };

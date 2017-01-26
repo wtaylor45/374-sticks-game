@@ -22,7 +22,7 @@ var loadState = {
 		simulation = false;
 
 		initVars();
-
+    
 		map = {};
 		for(var i = 21; i > 0; i--){
 			map[i.toString()] = [i, 33.33, 33.33, 33.34];

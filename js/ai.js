@@ -61,7 +61,8 @@ function AI(){
     }
 
     this.updateAI = function(){
-        var change = 5;
+        var change = slider_arrow.x/7;
+        console.log("Arrow at" + slider_arrow.x + " and change is " + change);
         if(playerWin){
             change *= -1; //Decrement values for chosen moves
         }

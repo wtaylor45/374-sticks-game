@@ -13,6 +13,7 @@ var player;
 var sticksLeft;
 var playerWin;
 var simulation;
+var simGames;
 
 //AI globals:
 var moves;
@@ -33,8 +34,7 @@ function createSticks(){
 }
 
 function startGame(){
-  //For alpha purposes, simulation is false
-  simulation = false;
+  simulation = true;
 
   initVars();
 
@@ -48,13 +48,23 @@ function startGame(){
 
   $('#excelDataTable').empty();
   buildHtmlTable('#excelDataTable');
+
+  var startTime = new Date().getTime() / 1000;
+  ai.trainAI(simGames);
+  var endTime = new Date().getTime() / 1000;
+  var simTime = endTime - startTime;
+  Logger.info('%c Simulation took ' + simTime + ' seconds', 'background: #222; color: #fff');
+
+  Logger.debug('Done w simulation');
   ai.takeTurn();
 }
 
 function endGame(){
   gameOver = true;
-  if(!turn){
+  if(turn){
       playerWin = true;
+  }else{
+    playerWin = false;
   }
   ai.updateAI();
 
@@ -76,7 +86,6 @@ function initVars(){
   gameOver = false;
   moves = {};
   playerWin = false;
-  //simulation = true;
 
   sticksLeft = 21;
 }
@@ -102,7 +111,7 @@ function removeSticks(num){
 }
 
 function buildHtmlTable(selector) {
- var columns = addAllColumnHeaders(selector);
+  var columns = addAllColumnHeaders(selector);
 
   for (var i = 21; i > 0; i--) {
     var row$ = $('<tr/>');

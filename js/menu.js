@@ -1,6 +1,6 @@
 
 var menuState = {
-	
+
 	create: function() {
 		var nameLabel1 = game.add.text(80, 40, 'MENU', 
 			{font: '25px Arial', fill: '#ffffff' });
@@ -17,6 +17,7 @@ var menuState = {
 	},
 
 	start: function() {
+		simGames = 100;
 		game.state.start('play');
 	},
 

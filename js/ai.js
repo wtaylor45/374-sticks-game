@@ -161,7 +161,7 @@ function AI(){
               playerWin = false;
               break;
             }
-            
+
             //Next turn is random number between 1 and 3 if not game over
             if(sticksLeft > 0){
                 Logger.debug('RNG Turn');

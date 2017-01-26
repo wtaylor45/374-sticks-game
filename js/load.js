@@ -8,6 +8,8 @@ var loadState = {
 		game.load.spritesheet('rematch', 'assets/buttons/rematch_button.png', 100, 50);
 		game.load.spritesheet('quit', 'assets/buttons/button_quit.png', 100, 50);
 		game.load.image('stick_key', 'assets/sprites/stick.png');
+		game.load.image('slider', 'assets/sprites/slider.png');
+		game.load.image('slider_arrow', 'assets/sprites/slider_arrow.png');
 
 	},
 
@@ -22,7 +24,7 @@ var loadState = {
 		simulation = false;
 
 		initVars();
-    
+
 		map = {};
 		for(var i = 21; i > 0; i--){
 			map[i.toString()] = [i, 33.33, 33.33, 33.34];

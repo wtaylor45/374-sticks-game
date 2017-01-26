@@ -18,14 +18,14 @@ function AI(){
 
     this.takeTurn = function(){
       quit_btn.inputEnabled = false;
-      console.log('AI taking turn: ', sticksLeft);
+      Logger.debug('AI taking turn: ', sticksLeft);
 
         //Random pick from weighted map of choices
         var weighted = map[sticksLeft.toString()];
         var randNum = Math.floor((Math.random() * 100) + 1);
         var num;
 
-        //console.log('ranges: ', weighted[1], ', ', (weighted[1]+weighted[2]), ', ', (weighted[1]+weighted[2]+weighted[3]), ', num is:', randNum);
+        Logger.debug('ranges: ', weighted[1], ', ', (weighted[1]+weighted[2]), ', ', (weighted[1]+weighted[2]+weighted[3]), ', num is:', randNum);
         if(randNum <= weighted[1]){
             num = 1;
         }
@@ -36,12 +36,12 @@ function AI(){
             num = 3;
         }
         else{
-            console.log('ERROR: Rand num not in range of percentiles')
+            Logger.error('ERROR: Rand num not in range of percentiles')
         }
         stickschosen = num;
         if(num > sticksLeft){
             num = sticksLeft;
-            console.log('ERROR: Impossible move chosen, changed');
+            Logger.warn('ERROR: Impossible move chosen, changed');
         }
 
         if(!simulation){
@@ -71,7 +71,7 @@ function AI(){
             var key = keys[i]
             //If key is in map (should always be true) update map values
             if(key in map){
-                console.log(key + ":" + moves[key]);
+                Logger.debug(key + ":" + moves[key]);
                 var cur_vals = map[key];
                 var spot = moves[key];
 
@@ -79,7 +79,6 @@ function AI(){
                 cur_vals = [];
             }
         }
-        //console.log(map);
         $('#excelDataTable').empty();
         buildHtmlTable('#excelDataTable');
 
@@ -141,7 +140,7 @@ function AI(){
     }
 
     this.trainAI = function(num){
-        console.log('Simulations left: ', num);
+        Logger.debug('Simulations left: ', num);
         initVars();
         if(num <= 0){
             simulation = false;
@@ -160,7 +159,7 @@ function AI(){
 
             //Next turn is random number between 1 and 3 if not game over
             if(sticksLeft > 0){
-                console.log('RNG Turn');
+                Logger.debug('RNG Turn');
                 var num = Math.floor((Math.random() * 3) + 1);
                 if(num > sticksLeft){
                     num = sticksLeft;

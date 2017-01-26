@@ -53,9 +53,9 @@ function startGame(){
   ai.trainAI(simGames);
   var endTime = new Date().getTime() / 1000;
   var simTime = endTime - startTime;
-  console.log('%c Simulation took ' + simTime + ' seconds', 'background: #222; color: #fff');
+  Logger.info('%c Simulation took ' + simTime + ' seconds', 'background: #222; color: #fff');
 
-  console.log('Done w simulation');
+  Logger.debug('Done w simulation');
   ai.takeTurn();
 }
 
@@ -109,7 +109,7 @@ function removeSticks(num){
 }
 
 function buildHtmlTable(selector) {
- var columns = addAllColumnHeaders(selector);
+  var columns = addAllColumnHeaders(selector);
 
   for (var i = 21; i > 0; i--) {
     var row$ = $('<tr/>');

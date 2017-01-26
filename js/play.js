@@ -18,7 +18,7 @@ var playState = {
 	    rematch_btn = game.add.button(400, game.height-120, 'rematch', rematch, this, 0, 1, 2);
 	    quit_btn = game.add.button(400, game.height-60, 'quit', goToMenu, this, 0, 1, 2);
 
-	    simulate_btn = game.add.button(110, game.height-130, 'simulate', simulate, this, 0, 1, 2);
+	    simulate_btn = game.add.button(110, game.height-130, 'sim10', simulate, this);
 
 	    // Create and show the stick objects
 	    sticks = game.add.group();

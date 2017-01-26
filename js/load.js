@@ -20,6 +20,7 @@ var loadState = {
 		game.load.image('title', 'assets/sprites/title.png');
 		game.load.image('bg', 'assets/misc/bg.png');
 		game.load.image('sim_title', 'assets/misc/train.png');
+		game.load.image('sim10', 'assets/buttons/button_simulate.png');
 	},
 
 	create: function() {

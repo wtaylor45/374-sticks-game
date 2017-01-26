@@ -2,10 +2,12 @@
 var menuState = {
 
 	create: function() {
-		//var nameLabel1 = game.add.text(80, 40, 'MENU', 
+		game.add.tileSprite(0, 0, 1000, 600, 'bg');
+
+		//var nameLabel1 = game.add.text(80, 40, 'MENU',
 			//{font: '25px Arial', fill: '#ffffff' });
 		var title = game.add.sprite(40,80, 'title');
-		//var nameLabel2 = game.add.text(80, 120, 'Press \'w\' to go to the game.', 
+		//var nameLabel2 = game.add.text(80, 120, 'Press \'w\' to go to the game.',
 			//{font: '25px Arial', fill: '#ffffff' });
 
 		var howtoplay_button = game.add.button(200, 180, 'how_to_play', this.instructions, this, 0, 1, 2);

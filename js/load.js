@@ -14,6 +14,7 @@ var loadState = {
 		game.load.image('slider', 'assets/sprites/slider.png');
 		game.load.image('slider_arrow', 'assets/sprites/slider_arrow.png');
 		game.load.image('title', 'assets/sprites/title.png');
+		game.load.image('bg', 'assets/misc/bg.png');
 
 	},
 

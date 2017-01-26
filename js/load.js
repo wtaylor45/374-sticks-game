@@ -7,9 +7,13 @@ var loadState = {
 		game.load.spritesheet('button_3', 'assets/buttons/button_3.png', 100, 50);
 		game.load.spritesheet('rematch', 'assets/buttons/rematch_button.png', 100, 50);
 		game.load.spritesheet('quit', 'assets/buttons/button_quit.png', 100, 50);
+		game.load.spritesheet('how_to_play', 'assets/buttons/howtoplay_button.png', 150, 75);
+		game.load.spritesheet('start', 'assets/buttons/start_button.png', 150, 75);
+		game.load.spritesheet('menu', 'assets/buttons/menu_button.png', 150, 75);
 		game.load.image('stick_key', 'assets/sprites/stick.png');
 		game.load.image('slider', 'assets/sprites/slider.png');
 		game.load.image('slider_arrow', 'assets/sprites/slider_arrow.png');
+		game.load.image('title', 'assets/sprites/title.png');
 
 	},
 

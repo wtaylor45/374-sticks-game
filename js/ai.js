@@ -151,12 +151,16 @@ function AI(){
     }
 
     this.simulateGame = function(){
-
         while(sticksLeft > 0){
             //AI takes turn
             this.takingTurn = true;
             this.takeTurn();
 
+            if(sticksLeft <= 0){
+              playerWin = false;
+              break;
+            }
+            
             //Next turn is random number between 1 and 3 if not game over
             if(sticksLeft > 0){
                 Logger.debug('RNG Turn');
@@ -165,9 +169,9 @@ function AI(){
                     num = sticksLeft;
                 }
                 removeSticks(num);
-            }else{
-              playerWin = true;
             }
+
+            if(sticksLeft<=0) playerWin = true;
         }
 
 

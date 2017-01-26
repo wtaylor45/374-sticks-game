@@ -4,7 +4,7 @@ var bootState = {
 
 
 	create: function() {
-		Logger.useDefaults();
+		//Logger.useDefaults();
 		game.state.start('load');
 
 	}

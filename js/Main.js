@@ -61,8 +61,10 @@ function startGame(){
 
 function endGame(){
   gameOver = true;
-  if(!turn){
+  if(turn){
       playerWin = true;
+  }else{
+    playerWin = false;
   }
   ai.updateAI();
 

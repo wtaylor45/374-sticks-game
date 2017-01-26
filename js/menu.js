@@ -20,7 +20,7 @@ var menuState = {
 
 	start: function() {
 		simGames = 100;
-		game.state.start('play');
+		game.state.start('preplay');
 	},
 
 	instructions: function(){

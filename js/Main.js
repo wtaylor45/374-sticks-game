@@ -48,6 +48,7 @@ function startGame(){
 
   $('#excelDataTable').empty();
   buildHtmlTable('#excelDataTable');
+  
 
   var startTime = new Date().getTime() / 1000;
   ai.trainAI(simGames);
@@ -56,6 +57,7 @@ function startGame(){
   Logger.info('%c Simulation took ' + simTime + ' seconds', 'background: #222; color: #fff');
 
   Logger.debug('Done w simulation');
+  
   ai.takeTurn();
 }
 

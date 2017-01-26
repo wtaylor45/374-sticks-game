@@ -120,7 +120,7 @@ function buildHtmlTable(selector) {
         var cellValue = map[i][choices];
         if (cellValue == null) cellValue = "";
         row$.append($('<td/>').html(cellValue));
-        if(map[i][0] in moves){
+        if(map[i][0] in moves && !simulation){
           if(playerWin) row$.css('background-color', '#ff0000');
           else row$.css('background-color', '#149800');
         }

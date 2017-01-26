@@ -15,8 +15,8 @@ var playState = {
 	      takeTurn(3);
 	    }, this, 0, 1, 2);
 
-	    rematch_btn = game.add.button(game.width-100, game.height-110, 'rematch', rematch, this, 0, 1, 2);
-	    quit_btn = game.add.button(game.width-100, game.height-55, 'quit', goToMenu, this, 0, 1, 2);
+	    rematch_btn = game.add.button(400, game.height-120, 'rematch', rematch, this, 0, 1, 2);
+	    quit_btn = game.add.button(400, game.height-60, 'quit', goToMenu, this, 0, 1, 2);
 
 	    // Create and show the stick objects
 	    sticks = game.add.group();

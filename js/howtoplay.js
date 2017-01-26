@@ -12,8 +12,9 @@ var instructionState = {
 			"\nWatch how the AI\'\s (Nathaniel\'\s) picks change " +
 			"\nthe more games he plays.";
 		var text = game.add.text(40, 120, instructionParag,  { font: "18px Arial", fill: '#ffffff'});
-		var nameLabel3 = game.add.text(40, 300, 'Press \'w\' to go back to the menu.', 
-			{font: '25px Arial', fill: '#ffffff' });
+		//var nameLabel3 = game.add.text(40, 300, 'Press \'w\' to go back to the menu.', 
+			//{font: '25px Arial', fill: '#ffffff' });
+		var menu_button = game.add.button(190, 290, 'menu', this.start, this, 0, 1, 2);
 
 		var wKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
 		wKey.onDown.addOnce(this.start, this);

@@ -7,3 +7,4 @@ game.state.add('menu', menuState);
 //game.state.add('howToPlay', howToPlayState);
 game.state.add('play', playState);
 game.state.start('boot');
+game.state.add('howtoplay', instructionState);

@@ -2,7 +2,9 @@
 var menuState = {
 
 	create: function() {
-		//var nameLabel1 = game.add.text(80, 40, 'MENU', 
+		game.add.tileSprite(0, 0, 1000, 600, 'bg');
+
+		//var nameLabel1 = game.add.text(80, 40, 'MENU',
 			//{font: '25px Arial', fill: '#ffffff' });
 		var title = game.add.sprite(game.width/2 - game.cache.getImage('title').width/2 ,80, 'title');
 		//var nameLabel2 = game.add.text(80, 120, 'Press \'w\' to go to the game.', 

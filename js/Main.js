@@ -48,6 +48,7 @@ function startGame(){
 
   $('#excelDataTable').empty();
   buildHtmlTable('#excelDataTable');
+  
 
   var startTime = new Date().getTime() / 1000;
   ai.trainAI(simGames);
@@ -56,6 +57,7 @@ function startGame(){
   Logger.info('%c Simulation took ' + simTime + ' seconds', 'background: #222; color: #fff');
 
   Logger.debug('Done w simulation');
+  
   ai.takeTurn();
 }
 
@@ -120,7 +122,7 @@ function buildHtmlTable(selector) {
         var cellValue = map[i][choices];
         if (cellValue == null) cellValue = "";
         row$.append($('<td/>').html(cellValue));
-        if(map[i][0] in moves){
+        if(map[i][0] in moves && !simulation){
           if(playerWin) row$.css('background-color', '#ff0000');
           else row$.css('background-color', '#149800');
         }

@@ -9,10 +9,17 @@ var menuState = {
 
 		var wKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
 		wKey.onDown.addOnce(this.start, this);
+		var iKey = game.input.keyboard.addKey(Phaser.Keyboard.I);
+		iKey.onDown.addOnce(this.instructions, this);
 
 	},
 
 	start: function() {
 		game.state.start('play');
-	}
+	},
+
+	instructions: function(){
+		game.state.start('howtoplay');
+	},
+
 };

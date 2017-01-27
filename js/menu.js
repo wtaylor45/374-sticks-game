@@ -27,6 +27,17 @@ var menuState = {
 			this.preTrain_10_button.visible = false;
 			this.preTrain_100_button.visible = false;
 			this.sim_sprite.visible = false;
+
+		this.numSticks_slider = game.add.sprite(10,500, 'numsticks_slider');
+    	numSticks_arrow = game.add.sprite(350,500, 'numSticks_arrow');
+    	numSticks_arrow.inputEnabled = true;
+    	boundingBox = new Phaser.Rectangle(0, 500, 400, 50);
+    	numSticks_arrow.input.enableDrag(false, false, false, 255, boundingBox, null);
+    	numSticks_arrow.input.setDragLock(true, true);
+    	numSticks_arrow.input.enableSnap(50, 50, true, true);
+
+    	this.numSticks_slider.visible = false;
+		numSticks_arrow.visible = false;
 	},
 
 	start: function() {
@@ -36,6 +47,11 @@ var menuState = {
 		this.preTrain_1_button.visible = true;
 		this.preTrain_10_button.visible = true;
 		this.preTrain_100_button.visible = true;
+		
+		this.numSticks_slider.visible = true;
+		numSticks_arrow.visible = true;
+		console.log(numSticks_arrow.x);
+		
 	},
 
 	instructions: function(){

@@ -4,6 +4,7 @@
  * Define global variables
  */
 var sticks;
+var startingSticks
 var button_1, button_2, button_3;
 var rematch_btn, quit_btn;
 var turn; //true = AI turn, false = player turn
@@ -28,9 +29,14 @@ function createSticks(){
 
   sticks.removeAll(true);
 
+  var sticksArray = startingSticks;
+
   for (var y = 0; y < 3; y++){
       for (var x = 0; x < 7; x++){
-          stick = sticks.create(40 + (x * 60), 50 + (y * 130), 'stick_key', null, 7*x + y +1);
+          if(sticksArray > 0){
+            stick = sticks.create(40 + (x * 60), 50 + (y * 130), 'stick_key', null, 7*x + y +1);
+          }
+          sticksArray--
       }
   }
 }
@@ -40,11 +46,13 @@ function startGame(){
   gamesPlayed = 0;
   simulated = false;
 
+  startingSticks = (numSticks_arrow.x/50) + 14;
+
   initVars();
 
   ai.init();
 
-  sticksLeft = 21;
+  sticksLeft = startingSticks;
   createSticks();
 
   moveButtonsEnabled(false);
@@ -108,7 +116,7 @@ function initVars(){
   moves = {};
   playerWin = false;
 
-  sticksLeft = 21;
+  sticksLeft = startingSticks;
 }
 
 function moveButtonsEnabled(bool){
@@ -132,7 +140,7 @@ function removeSticks(num){
 function buildHtmlTable(selector) {
   var columns = addAllColumnHeaders(selector);
 
-  for (var i = 21; i > 0; i--) {
+  for (var i = startingSticks; i > 0; i--) {
     var row$ = $('<tr/>');
     //for (var colIndex = 0; colIndex < columns.length; colIndex++) {
       for (var choices = 0; choices < columns.length; choices++){

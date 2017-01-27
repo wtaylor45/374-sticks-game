@@ -21,6 +21,8 @@ var loadState = {
 		game.load.image('bg', 'assets/misc/bg.png');
 		game.load.image('sim_title', 'assets/misc/train.png');
 		game.load.image('sim10', 'assets/buttons/button_simulate.png');
+		game.load.image('numsticks_slider', 'assets/sprites/numsticks_slider.png');
+		game.load.image('numSticks_arrow', 'assets/sprites/numSticks_arrow.png');
 	},
 
 	create: function() {
@@ -36,14 +38,14 @@ var loadState = {
 		initVars();
 
 		map = {};
-		for(var i = 21; i > 0; i--){
+		for(var i = startingSticks; i > 0; i--){
 			map[i.toString()] = [i, 33.33, 33.33, 33.34];
 		}
 		//Hard code rules, cannot choose more sticks than are available
 		map['2'] = [2, 50, 50, 0];
 		map['1'] = [1, 100, 0, 0];
 
-		sticksLeft = 21;
+		sticksLeft = startingSticks;
 
 		/*$('#excelDataTable').empty();
 		buildHtmlTable('#excelDataTable');*/

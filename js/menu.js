@@ -9,24 +9,35 @@ var menuState = {
 		this.start_button = game.add.button(game.width/2 - game.cache.getImage('start').width/6, 230, 'start', this.start, this, 0, 1, 2);
 		this.sim_sprite = game.add.sprite(game.width/2 - game.cache.getImage('title').width/2 , 175, 'sim_title')
 
-		this.preTrain_1_button = game.add.button((game.width/2)-50, game.height/2+20, 'preTrain1', function(){
-			simGames = 1;
-			this.play();
-		}, this, 1, 0, 2);
-		this.preTrain_10_button = game.add.button(game.width/2-50, game.height/2+80, 'preTrain10', function(){
-			simGames = 10;
-			this.play();
-		}, this, 1, 0, 2);
-		this.preTrain_100_button = game.add.button(game.width/2-50, game.height/2+140, 'preTrain100', function(){
-			simGames = 100;
-			this.play();
-		}, this, 1, 0, 2);
+			this.preTrain_1_button = game.add.button((game.width/2)-50, game.height/2+20, 'preTrain1', function(){
+				simGames = 1;
+				this.play();
+			}, this, 1, 0, 2);
+			this.preTrain_10_button = game.add.button(game.width/2-50, game.height/2+80, 'preTrain10', function(){
+				simGames = 10;
+				this.play();
+			}, this, 1, 0, 2);
+			this.preTrain_100_button = game.add.button(game.width/2-50, game.height/2+140, 'preTrain100', function(){
+				simGames = 100;
+				this.play();
+			}, this, 1, 0, 2);
 
 
-		this.preTrain_1_button.visible = false;
-		this.preTrain_10_button.visible = false;
-		this.preTrain_100_button.visible = false;
-		this.sim_sprite.visible = false;
+			this.preTrain_1_button.visible = false;
+			this.preTrain_10_button.visible = false;
+			this.preTrain_100_button.visible = false;
+			this.sim_sprite.visible = false;
+
+		this.numSticks_slider = game.add.sprite(10,500, 'numsticks_slider');
+    	numSticks_arrow = game.add.sprite(350,500, 'numSticks_arrow');
+    	numSticks_arrow.inputEnabled = true;
+    	boundingBox = new Phaser.Rectangle(0, 500, 400, 50);
+    	numSticks_arrow.input.enableDrag(false, false, false, 255, boundingBox, null);
+    	numSticks_arrow.input.setDragLock(true, true);
+    	numSticks_arrow.input.enableSnap(50, 50, true, true);
+
+    	this.numSticks_slider.visible = false;
+		numSticks_arrow.visible = false;
 	},
 
 	start: function() {
@@ -36,6 +47,11 @@ var menuState = {
 		this.preTrain_1_button.visible = true;
 		this.preTrain_10_button.visible = true;
 		this.preTrain_100_button.visible = true;
+		
+		this.numSticks_slider.visible = true;
+		numSticks_arrow.visible = true;
+		console.log(numSticks_arrow.x);
+		
 	},
 
 	instructions: function(){

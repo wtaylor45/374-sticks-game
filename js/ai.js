@@ -9,17 +9,34 @@ function AI(){
     this.init = function(){
         map = {};
         this.smartMap = {};
+        var weight;
         for(var i = 21; i > 0; i--){
             map[i.toString()] = [i, 33.33, 33.33, 33.34];
 
+            if(i < 5){
+                weight = 100;
+            }
+            else if(i < 9){
+                weight = 90;
+            }
+            else if(i < 13){
+                weight = 80;
+            }
+            else if(i < 17){
+                weight = 70;
+            }
+            else{
+                weight = 60;
+            }
+
             if(i%4 == 1){
-                this.smartMap[i.toString()] = [i, 70, 15, 15];
+                this.smartMap[i.toString()] = [i, weight, (100-weight)/2, (100-weight)/2];
             }
             else if(i%4 == 2){ 
-                this.smartMap[i.toString()] = [i, 15, 70, 15];
+                this.smartMap[i.toString()] = [i, (100-weight)/2, weight, (100-weight)/2];
             }
             else if(i%4 == 3){
-                this.smartMap[i.toString()] = [i, 15, 15, 70];
+                this.smartMap[i.toString()] = [i, (100-weight)/2, (100-weight)/2, weight];
             }
             else{
                 this.smartMap[i.toString()] = [i, 33.33, 33.33, 33.34];
@@ -30,6 +47,7 @@ function AI(){
         map['2'] = [2, 50, 50, 0];
         map['1'] = [1, 100, 0, 0];
 
+        Logger.debug(JSON.stringify(this.smartMap));
 
 
     }

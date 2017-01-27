@@ -9,7 +9,7 @@ function AI(){
     this.init = function(){
         map = {};
         this.smartMap = {};
-        for(var i = 21; i > 0; i--){
+        for(var i = startingSticks; i > 0; i--){
             map[i.toString()] = [i, 33.33, 33.33, 33.34];
 
             if(i%4 == 1){

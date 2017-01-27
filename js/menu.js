@@ -42,31 +42,13 @@ var menuState = {
 		game.state.start('howtoplay');
 	},
 
-	train1: function(){
+	train: function(x){
 		var startTime = new Date().getTime() / 1000;
-			ai.trainAI(1);
-			var endTime = new Date().getTime() / 1000;
-			var simTime = endTime - startTime;
-			Logger.info('%c Simulation took ' + simTime + ' seconds', 'background: #222; color: #fff');
-			Logger.debug('Done w simulation');
-
-	},
-	train10: function(){
-		var startTime = new Date().getTime() / 1000;
-			ai.trainAI(10);
-			var endTime = new Date().getTime() / 1000;
-			var simTime = endTime - startTime;
-			Logger.info('%c Simulation took ' + simTime + ' seconds', 'background: #222; color: #fff');
-			Logger.debug('Done w simulation');
-
-	},
-	train100: function(){
-		var startTime = new Date().getTime() / 1000;
-			ai.trainAI(100);
-			var endTime = new Date().getTime() / 1000;
-			var simTime = endTime - startTime;
-			Logger.info('%c Simulation took ' + simTime + ' seconds', 'background: #222; color: #fff');
-			Logger.debug('Done w simulation');
+		ai.trainAI(x);
+		var endTime = new Date().getTime() / 1000;
+		var simTime = endTime - startTime;
+		Logger.info('%c Simulation took ' + simTime + ' seconds', 'background: #222; color: #fff');
+		Logger.debug('Done w simulation');
 
 	},
 

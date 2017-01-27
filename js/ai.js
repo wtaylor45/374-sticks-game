@@ -4,15 +4,33 @@ function AI(){
     this.takingTurn = false;
     this.floor = 0;
     this.ceiling = 100;
+    this.smartMap;
 
     this.init = function(){
         map = {};
+        this.smartMap = {};
         for(var i = 21; i > 0; i--){
             map[i.toString()] = [i, 33.33, 33.33, 33.34];
+
+            if(i%4 == 1){
+                this.smartMap[i.toString()] = [i, 70, 15, 15];
+            }
+            else if(i%4 == 2){ 
+                this.smartMap[i.toString()] = [i, 15, 70, 15];
+            }
+            else if(i%4 == 3){
+                this.smartMap[i.toString()] = [i, 15, 15, 70];
+            }
+            else{
+                this.smartMap[i.toString()] = [i, 33.33, 33.33, 33.34];
+            }
+
         }
         //Hard code rules, cannot choose more sticks than are available
         map['2'] = [2, 50, 50, 0];
         map['1'] = [1, 100, 0, 0];
+
+
 
     }
 
@@ -168,9 +186,25 @@ function AI(){
 
             //Next turn is random number between 1 and 3 if not game over
             if(sticksLeft > 0){
+                //Random pick from weighted map of choices
+                var weighted = this.smartMap[sticksLeft.toString()];
+                var randNum = Math.floor((Math.random() * 100) + 1);
+                var num;
+
+                Logger.debug('ranges: ', weighted[1], ', ', (weighted[1]+weighted[2]), ', ', (weighted[1]+weighted[2]+weighted[3]), ', num is:', randNum);
+                if(randNum <= weighted[1]){
+                    num = 1;
+                }
+                else if((weighted[1] < randNum) && (randNum <= (weighted[1]+weighted[2]))){
+                    num = 2;
+                }
+                else if(((weighted[1]+weighted[2]) < randNum) && (randNum <= 100)){
+                    num = 3;
+                }
+
                 Logger.debug('RNG Turn');
-                var limit = (sticksLeft < 3) ? sticksLeft : 3;
-                var num = Math.floor((Math.random() * limit) + 1);
+                /*var limit = (sticksLeft < 3) ? sticksLeft : 3;
+                var num = Math.floor((Math.random() * limit) + 1);*/
                 removeSticks(num);
             }
 

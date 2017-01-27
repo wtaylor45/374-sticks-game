@@ -28,7 +28,7 @@ var loadState = {
 	create: function() {
 		game.state.start('menu');
 
-
+		$('#excelDataTable').hide();
 
 		var loadingLabel = game.add.text(80, 150, 'loading...',
 		{font: '30px Arial', fill: '#ffffff' });

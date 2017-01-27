@@ -61,6 +61,7 @@ function startGame(){
 
   $('#excelDataTable').empty();
   buildHtmlTable('#excelDataTable');
+  $('#excelDataTable').show();
   
 
   var startTime = new Date().getTime() / 1000;

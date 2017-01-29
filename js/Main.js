@@ -46,7 +46,9 @@ function startGame(){
   gamesPlayed = 0;
   simulated = false;
 
-  startingSticks = (numSticks_arrow.x/50) + 14;
+  //startingSticks = (numSticks_arrow.x/50) + 8;
+  startingSticks = 21;
+  //Logger.debug('arrow position: ', numSticks_arrow.x);
 
   initVars();
 

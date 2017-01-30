@@ -32,18 +32,20 @@ var menuState = {
 			this.preTrain_500_button.visible = false;
 			this.sim_sprite.visible = false;
 
-		//this.sticks_dialogue = game.add.sprite(game.width/2 - game.cache.getImage('sticks_dialogue').width/2 , game.height/2 + 20 - (game.cache.getImage('sticks_dialogue').height), 'sticks_dialogue');
-		//this.numSticks_slider = game.add.sprite(game.width/2-game.cache.getImage('numsticks_slider').width/2, game.height/2-20, 'numsticks_slider');
-    	//numSticks_arrow = game.add.sprite(650, game.height/2-20, 'numSticks_arrow');
-    	//numSticks_arrow.inputEnabled = true;
-    	boundingBox = new Phaser.Rectangle(300, game.height/2 - 20, 400, 40);
-    	//numSticks_arrow.input.enableDrag(false, false, false, 255, boundingBox, null);
-    	//numSticks_arrow.input.setDragLock(true, true);
-    	//numSticks_arrow.input.enableSnap(50, 50, true, true);
+		this.sticks_dialogue = game.add.sprite(game.width/2 - game.cache.getImage('sticks_dialogue').width/2 , game.height/2 - 50 - (game.cache.getImage('sticks_dialogue').height), 'sticks_dialogue');
+		this.numSticks_slider = game.add.sprite(game.width/2-game.cache.getImage('numsticks_slider').width/2, game.height/2 - 80, 'numsticks_slider');
+    	this.numSticks_arrow = game.add.sprite(650, game.height/2-85, 'numSticks_arrow');
 
-    	//this.numSticks_slider.visible = false;
-		//numSticks_arrow.visible = false;
-		//this.sticks_dialogue.visible = false;
+    	this.numSticks_arrow.inputEnabled = true;
+    	boundingBox = new Phaser.Rectangle(300, game.height/2 - 80, 400, 40);
+    	this.numSticks_arrow.input.enableDrag(false, false, false, 255, boundingBox, null);
+    	this.numSticks_arrow.input.setDragLock(true, true);
+    	this.numSticks_arrow.input.enableSnap(50, 50, true, true);
+
+
+    	this.numSticks_slider.visible = false;
+		this.numSticks_arrow.visible = false;
+		this.sticks_dialogue.visible = false;
 	},
 
 	start: function() {
@@ -54,10 +56,10 @@ var menuState = {
 		this.preTrain_50_button.visible = true;
 		this.preTrain_100_button.visible = true;
 		this.preTrain_500_button.visible = true;
-		//this.sticks_dialogue.visible = true;
+		this.sticks_dialogue.visible = true;
 
-		//this.numSticks_slider.visible = true;
-		//numSticks_arrow.visible = true;
+		this.numSticks_slider.visible = true;
+		this.numSticks_arrow.visible = true;
 		//console.log(numSticks_arrow.x);
 		
 	},

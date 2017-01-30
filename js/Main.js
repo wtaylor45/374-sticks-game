@@ -46,8 +46,8 @@ function startGame(){
   gamesPlayed = 0;
   simulated = false;
 
-  //startingSticks = (numSticks_arrow.x/50) + 8;
-  startingSticks = 21;
+  startingSticks = (menuState.numSticks_arrow.x/50) + 8;
+  //startingSticks = 21;
   //Logger.debug('arrow position: ', numSticks_arrow.x);
 
   initVars();
@@ -187,5 +187,5 @@ function takeTurn(num){
 
 function goToMenu(){
   game.state.start('menu');
-  $('#excelDataTable').html("");
+  $('#excelDataTable').hide();
 }

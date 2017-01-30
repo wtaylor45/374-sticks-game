@@ -2,7 +2,7 @@ var playState = {
 	//AI globals
 
 	create: function() {
-		player = new Player();
+		  player = new Player();
 	    ai = new AI();
 
 	    button_1 = game.add.button(5, game.height-130, 'button_1', function(){
@@ -14,6 +14,21 @@ var playState = {
 	    button_3 = game.add.button(215, game.height-130, 'button_3', function(){
 	      takeTurn(3);
 	    }, this, 0, 1, 2);
+
+			button_1.onInputDown.add(function(){
+				button_2.inputEnabled = false;
+				button_3.inputEnabled = false;
+			});
+
+			button_2.onInputDown.add(function(){
+				button_1.inputEnabled = false;
+				button_3.inputEnabled = false;
+			});
+
+			button_3.onInputDown.add(function(){
+				button_1.inputEnabled = false;
+				button_2.inputEnabled = false;
+			});
 
 	    rematch_btn = game.add.button(400, game.height-120, 'rematch', rematch, this, 0, 1, 2);
 	    quit_btn = game.add.button(400, game.height-60, 'quit', goToMenu, this, 0, 1, 2);
@@ -89,4 +104,3 @@ var playState = {
 
 
 };
-

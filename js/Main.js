@@ -4,7 +4,7 @@
  * Define global variables
  */
 var sticks;
-var startingSticks
+var startingSticks;
 var button_1, button_2, button_3;
 var rematch_btn, quit_btn;
 var turn; //true = AI turn, false = player turn
@@ -64,7 +64,7 @@ function startGame(){
   $('#excelDataTable').empty();
   buildHtmlTable('#excelDataTable');
   $('#excelDataTable').show();
-  
+
 
   var startTime = new Date().getTime() / 1000;
   ai.trainAI(simGames);
@@ -73,7 +73,7 @@ function startGame(){
   Logger.info('%c Simulation took ' + simTime + ' seconds', 'background: #222; color: #fff');
 
   Logger.debug('Done w simulation');
-  
+
   initVars();
   ai.takeTurn();
 }
@@ -177,15 +177,15 @@ function addAllColumnHeaders(selector) {
 }
 
 function takeTurn(num){
-  if(num > sticksLeft){
-      num = sticksLeft;
-  }
-  removeSticks(num);
-  if(sticksLeft > 0) ai.takeTurn();
+    moveButtonsEnabled(false);
+    if(num > sticksLeft){
+        num = sticksLeft;
+    }
+    removeSticks(num);
+    if(sticksLeft > 0) ai.takeTurn();
 }
 
 function goToMenu(){
   game.state.start('menu');
   $('#excelDataTable').html("");
 }
-

@@ -73,8 +73,9 @@ function AI(){
             num = sticksLeft;
             Logger.warn('ERROR: Impossible move chosen, changed');
         }
-        sticksChosen = num; //global variable used in render function
+        stickschosen = num; //global variable used in render function
 
+        console.log('chose '+ stickschosen+ ' sticks w sticksLeft ='+ sticksLeft);
         if(!simulation){
             //Create time lag if this is againt a real player
             var lag = 1500;

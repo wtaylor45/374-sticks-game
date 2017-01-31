@@ -70,7 +70,7 @@ var menuState = {
 	//Goes to howtoplay state
 	instructions: function(){
 		game.state.start('howtoplay');
-	}
+	},
 	
 	//Goes to play state
 	play: function(){

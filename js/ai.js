@@ -1,7 +1,6 @@
 
 
 function AI(){
-    this.takingTurn = false;
     this.floor = 0;
     this.ceiling = 100;
     this.smartMap;
@@ -46,6 +45,8 @@ function AI(){
         //Hard code rules, cannot choose more sticks than are available
         map['2'] = [2, 50, 50, 0];
         map['1'] = [1, 100, 0, 0];
+        this.smartMap['2'] = [2, 0, 100, 0];
+        this.smartMap['1'] = [1, 100, 0, 0];
 
         Logger.debug(JSON.stringify(this.smartMap));
 
@@ -93,12 +94,10 @@ function AI(){
             removeSticks(num);
         }
 
-        this.takingTurn = false;
     }
 
     this.updateAI = function(){
         var change = slider_arrow.x/7;
-        console.log("Arrow at" + slider_arrow.x + " and change is " + change);
         if(playerWin){
             change *= -1; //Decrement values for chosen moves
         }
@@ -178,6 +177,14 @@ function AI(){
         return new_vals;
     }
 
+    /**
+     * This function is called in order to simulate a given number of games against an
+     * intelligent model. It is called recursively, decrementing the input value by one
+     * each time until the input value is 0.
+     *
+     * @param {int} num    The number of simulations left to perform
+     *
+     */
     this.trainAI = function(num){
         Logger.debug('Simulations left: ', num);
         
@@ -191,45 +198,73 @@ function AI(){
         }
     }
 
+    /**
+     * This function simulates one game for our AI against an intelligent model. When
+     * one game is complete, the updateAI function is called to update our AI's neural
+     * net.
+     */
     this.simulateGame = function(){
+        //While statement continues until either the AI or the model wins
         while(sticksLeft > 0){
-            //AI takes turn
-            this.takingTurn = true;
+            //AI takes turn, same as in regular game
             this.takeTurn();
 
             if(sticksLeft <= 0){
-              playerWin = false;
-              break;
+                //If AI picked up last stick, AI won
+                playerWin = false;
+                break;
             }
 
-            //Next turn is random number between 1 and 3 if not game over
-            if(sticksLeft > 0){
-                //Random pick from weighted map of choices
-                var weighted = this.smartMap[sticksLeft.toString()];
-                var randNum = Math.floor((Math.random() * 100) + 1);
-                var num;
+            //Model takes turn based on random pick from weighted smart map of choices
+            var num = this.chooseNum(this.smartMap[sticksLeft.toString()]);
+            Logger.debug('NUMBER CHOSEN BY SIM: ', num)
 
-                Logger.debug('ranges: ', weighted[1], ', ', (weighted[1]+weighted[2]), ', ', (weighted[1]+weighted[2]+weighted[3]), ', num is:', randNum);
-                if(randNum <= weighted[1]){
-                    num = 1;
-                }
-                else if((weighted[1] < randNum) && (randNum <= (weighted[1]+weighted[2]))){
-                    num = 2;
-                }
-                else if(((weighted[1]+weighted[2]) < randNum) && (randNum <= 100)){
-                    num = 3;
-                }
+            /*var weighted = this.smartMap[sticksLeft.toString()];
+            var randNum = Math.floor((Math.random() * 100) + 1);
+            var num;
 
-                Logger.debug('RNG Turn');
-                /*var limit = (sticksLeft < 3) ? sticksLeft : 3;
-                var num = Math.floor((Math.random() * limit) + 1);*/
-                removeSticks(num);
+            Logger.debug('ranges: ', weighted[1], ', ', (weighted[1]+weighted[2]), ', ', (weighted[1]+weighted[2]+weighted[3]), ', num is:', randNum);
+            if(randNum <= weighted[1]){
+                num = 1;
             }
+            else if((weighted[1] < randNum) && (randNum <= (weighted[1]+weighted[2]))){
+                num = 2;
+            }
+            else if(((weighted[1]+weighted[2]) < randNum) && (randNum <= 100)){
+                num = 3;
+            }
+
+            Logger.debug('RNG Turn');
+            /*var limit = (sticksLeft < 3) ? sticksLeft : 3;
+            var num = Math.floor((Math.random() * limit) + 1);*/
+
+            removeSticks(num);
 
             if(sticksLeft<=0) playerWin = true;
         }
 
 
         this.updateAI();
+    }
+
+    /**
+     * This function determines the 
+     *
+     */
+    this.chooseNum = function(weighted_map){
+        var randNum = Math.floor((Math.random() * 10000) + 100)/100;
+        var num;
+
+        if(randNum <= weighted_map[1]){
+            num = 1;
+        }
+        else if((weighted_map[1] < randNum) && (randNum <= (weighted_map[1]+weighted_map[2]))){
+            num = 2;
+        }
+        else if(((weighted_map[1]+weighted_map[2]) < randNum) && (randNum <= 100)){
+            num = 3;
+        }
+
+        return num;
     }
 }

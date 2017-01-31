@@ -1,6 +1,5 @@
 var playState = {
-	//AI globals
-
+	
 	create: function() {
 		player = new Player();
 	    ai = new AI();

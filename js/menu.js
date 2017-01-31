@@ -32,23 +32,26 @@ var menuState = {
 		this.preTrain_500_button.visible = false;
 		this.sim_sprite.visible = false;
 
+		//Creates sprites for number of sticks slider
 		this.sticks_dialogue = game.add.sprite(game.width/2 - game.cache.getImage('sticks_dialogue').width/2 , game.height/2 - (game.cache.getImage('sticks_dialogue').height), 'sticks_dialogue');
 		this.numSticks_slider = game.add.sprite(game.width/2-game.cache.getImage('numsticks_slider').width/2, game.height/2+5, 'numsticks_slider');
     	this.numSticks_arrow = game.add.sprite(650, game.height/2, 'numSticks_arrow');
 
+    	//Allows for drag of slider arrow and at certain increments
     	this.numSticks_arrow.inputEnabled = true;
     	//boundingBox = new Phaser.Rectangle(300, game.height/2, 400, 40);
     	this.numSticks_arrow.input.enableDrag(false, false, false, 255, null, this.numSticks_slider);
     	this.numSticks_arrow.input.setDragLock(true, true);
     	this.numSticks_arrow.input.enableSnap(50, 50, true, true);
 
-
+    	//Hides slider until start button is pressed
     	this.numSticks_slider.visible = false;
 		this.numSticks_arrow.visible = false;
 		this.sticks_dialogue.visible = false;
 	},
 
 	start: function() {
+		//Shows pretrain buttons and slider after start button is pressed
 		this.start_button.visible = false;
 		this.sim_sprite.visible = true;
 		this.howtoplay_button.visible = false;
@@ -64,6 +67,7 @@ var menuState = {
 		
 	},
 
+	//Goes to howtoplay state
 	instructions: function(){
 		game.state.start('howtoplay');
 	},
@@ -79,7 +83,7 @@ var menuState = {
 	},
 	*/
 	
-
+	//Goes to play state
 	play: function(){
 		game.state.start('play');
 	}

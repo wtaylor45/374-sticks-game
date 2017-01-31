@@ -38,8 +38,10 @@ var playState = {
 	    // Create and show the stick objects
 	    sticks = game.add.group();
 
+	    //Creates AI change slider
 	    slider = game.add.sprite(10,game.height - 75, 'slider');
     	slider_arrow = game.add.sprite(35,game.height - 72, 'slider_arrow');
+    	//Allow the slider to be dragged at certain increments and sets bounds for slider arrow
     	slider_arrow.inputEnabled = true;
     	bounds = new Phaser.Rectangle(0, game.height -75, 325, 50);
     	slider_arrow.input.enableDrag(false, false, false, 255, bounds, null);

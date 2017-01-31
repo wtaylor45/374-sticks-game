@@ -10,7 +10,7 @@ collapse; border-spacing: 0;
 .relative{
 	position: relative;
 	top: -550px;
-	left: 550px;
+	right: -550px;
 }
 
 td, th { border: 1px solid #CCC} /* Make cells a bit taller */

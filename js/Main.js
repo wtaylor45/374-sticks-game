@@ -46,6 +46,7 @@ function startGame(){
   gamesPlayed = 0;
   simulated = false;
 
+  //Sets the starting number of sticks based on the slider arrow on the menu screen
   startingSticks = (menuState.numSticks_arrow.x/50) + 8;
   //startingSticks = 21;
   //Logger.debug('arrow position: ', numSticks_arrow.x);
@@ -143,6 +144,7 @@ function removeSticks(num){
     turn = !turn;
 }
 
+//Builds HTML table based on the AI map
 function buildHtmlTable(selector) {
   var columns = addAllColumnHeaders(selector);
 
@@ -154,8 +156,8 @@ function buildHtmlTable(selector) {
         if (cellValue == null) cellValue = "";
         row$.append($('<td/>').html(cellValue));
         if(map[i][0] in moves && !simulation){
-          if(playerWin) row$.css('background-color', '#ff0000');
-          else row$.css('background-color', '#149800');
+          if(playerWin) row$.css('background-color', '#ff0000'); //Changed cells become red if player wins
+          else row$.css('background-color', '#149800'); // Changed cells become green if AI wins
         }
       }
     //}
@@ -163,6 +165,7 @@ function buildHtmlTable(selector) {
   }
 }
 
+//Sets up column headers for the HTML table
 function addAllColumnHeaders(selector) {
   var columnSet = ["# of sticks left", "1 stick", "2 sticks", "3 sticks"];
 

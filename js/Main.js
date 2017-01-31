@@ -126,6 +126,9 @@ function moveButtonsEnabled(bool){
   button_1.visible = bool;
   button_2.visible = bool;
   button_3.visible = bool;
+  button_1.inputEnabled = bool;
+  button_2.inputEnabled = bool;
+  button_3.inputEnabled = bool;
 }
 
 /*
@@ -177,6 +180,7 @@ function addAllColumnHeaders(selector) {
 }
 
 function takeTurn(num){
+
     moveButtonsEnabled(false);
     if(num > sticksLeft){
         num = sticksLeft;

@@ -32,7 +32,7 @@ function AI(){
             if(i%4 == 1){
                 this.smartMap[i.toString()] = [i, weight, (100-weight)/2, (100-weight)/2];
             }
-            else if(i%4 == 2){ 
+            else if(i%4 == 2){
                 this.smartMap[i.toString()] = [i, (100-weight)/2, weight, (100-weight)/2];
             }
             else if(i%4 == 3){
@@ -180,7 +180,7 @@ function AI(){
 
     this.trainAI = function(num){
         Logger.debug('Simulations left: ', num);
-        
+
         if(num <= 0){
             quit_btn.inputEnabled = true;
             simulation = false;

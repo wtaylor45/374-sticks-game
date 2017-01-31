@@ -38,10 +38,12 @@ var playState = {
 	    // Create and show the stick objects
 	    sticks = game.add.group();
 
-	    slider = game.add.sprite(10,525, 'slider');
-    	slider_arrow = game.add.sprite(35,528, 'slider_arrow');
+	    //Creates AI change slider
+	    slider = game.add.sprite(10,game.height - 75, 'slider');
+    	slider_arrow = game.add.sprite(35,game.height - 72, 'slider_arrow');
+    	//Allow the slider to be dragged at certain increments and sets bounds for slider arrow
     	slider_arrow.inputEnabled = true;
-    	bounds = new Phaser.Rectangle(0, 525, 325, 50);
+    	bounds = new Phaser.Rectangle(0, game.height -75, 325, 50);
     	slider_arrow.input.enableDrag(false, false, false, 255, bounds, null);
     	slider_arrow.input.setDragLock(true, false);
     	slider_arrow.input.enableSnap(17.5, 17.5, true, true);
@@ -68,12 +70,15 @@ var playState = {
 	},
 
 	render: function(){
+		//Displays the number of sticks left
 		game.debug.text("Sticks Left: " + sticksLeft, 32, 32,"#fff","16px Arial");
+		//Displays how many games the AI has played
 		game.debug.text("Games Played: " + gamesPlayed, 400, 32, "#fff","16px Arial");
 		if(simulated){
 			game.debug.text("Simulated 10 games", 130, 300,"#fff","32px Arial");
 
 		}
+		//Displays what the AI (Nathaniel) is choosing and whose turn it is
 		else{
 		    if(!turn && gameOver == false){
 		      if(stickschosen == 1){

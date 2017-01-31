@@ -67,7 +67,7 @@ var menuState = {
 	instructions: function(){
 		game.state.start('howtoplay');
 	},
-
+	/*
 	train: function(x){
 		var startTime = new Date().getTime() / 1000;
 		ai.trainAI(x);
@@ -77,6 +77,8 @@ var menuState = {
 		Logger.debug('Done w simulation');
 
 	},
+	*/
+	
 
 	play: function(){
 		game.state.start('play');

@@ -2,7 +2,7 @@ var playState = {
 	//AI globals
 
 	create: function() {
-		  player = new Player();
+		player = new Player();
 	    ai = new AI();
 
 	    button_1 = game.add.button(5, game.height-130, 'button_1', function(){
@@ -38,10 +38,10 @@ var playState = {
 	    // Create and show the stick objects
 	    sticks = game.add.group();
 
-	    slider = game.add.sprite(10,525, 'slider');
-    	slider_arrow = game.add.sprite(35,528, 'slider_arrow');
+	    slider = game.add.sprite(10,game.height - 75, 'slider');
+    	slider_arrow = game.add.sprite(35,game.height - 72, 'slider_arrow');
     	slider_arrow.inputEnabled = true;
-    	bounds = new Phaser.Rectangle(0, 525, 325, 50);
+    	bounds = new Phaser.Rectangle(0, game.height -75, 325, 50);
     	slider_arrow.input.enableDrag(false, false, false, 255, bounds, null);
     	slider_arrow.input.setDragLock(true, false);
     	slider_arrow.input.enableSnap(17.5, 17.5, true, true);

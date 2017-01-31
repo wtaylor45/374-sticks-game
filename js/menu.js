@@ -71,17 +71,6 @@ var menuState = {
 	instructions: function(){
 		game.state.start('howtoplay');
 	},
-	/*
-	train: function(x){
-		var startTime = new Date().getTime() / 1000;
-		ai.trainAI(x);
-		var endTime = new Date().getTime() / 1000;
-		var simTime = endTime - startTime;
-		Logger.info('%c Simulation took ' + simTime + ' seconds', 'background: #222; color: #fff');
-		Logger.debug('Done w simulation');
-
-	},
-	*/
 	
 	//Goes to play state
 	play: function(){

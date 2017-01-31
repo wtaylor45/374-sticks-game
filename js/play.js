@@ -1,8 +1,7 @@
 var playState = {
-	//AI globals
-
+	
 	create: function() {
-		player = new Player();
+		//player = new Player();
 	    ai = new AI();
 
 	    button_1 = game.add.button(5, game.height-130, 'button_1', function(){

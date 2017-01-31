@@ -1,27 +1,25 @@
-// BETA Version
-
 /*
  * Define global variables
  */
-var sticks;
-var startingSticks;
+var sticks; //group of stick objects
+var startingSticks; //number of sticks initially
 var button_1, button_2, button_3;
 var rematch_btn, quit_btn;
 var turn; //true = AI turn, false = player turn
-var gameOver;
+var gameOver; //boolean
 var ai;
 var player;
-var sticksLeft;
-var playerWin;
+var sticksLeft; //number of sticks left
+var playerWin; //boolean
 var simulation; //boolean tracking whether simulation is occuring
-var simGames; //will always be 0 after the simulation has run
+var simGames; //number of games left to simulate
 var gamesPlayed; //Keeps track of how many games the AI has played
 var simulated; //true = the simulate button was just pressed
 
 //AI globals:
-var moves;
-var map;
-var stickschosen;
+var map; //the AI's neural net, a hashmap
+var moves; //hashmap that records the current game moves by the AI
+var stickschosen; //the number of sticks the AI last chose
 
 
 function createSticks(){
@@ -48,8 +46,6 @@ function startGame(){
 
   //Sets the starting number of sticks based on the slider arrow on the menu screen
   startingSticks = (menuState.numSticks_arrow.x/50) + 8;
-  //startingSticks = 21;
-  //Logger.debug('arrow position: ', numSticks_arrow.x);
 
   initVars();
 

@@ -47,10 +47,7 @@ var loadState = {
 		map['1'] = [1, 100, 0, 0];
 
 		sticksLeft = startingSticks;
-		
-		game.state.start('menu');
 
-		/*$('#excelDataTable').empty();
-		buildHtmlTable('#excelDataTable');*/
+		game.state.start('menu');
 	},
 };

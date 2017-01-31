@@ -70,12 +70,15 @@ var playState = {
 	},
 
 	render: function(){
+		//Displays the number of sticks left
 		game.debug.text("Sticks Left: " + sticksLeft, 32, 32,"#fff","16px Arial");
+		//Displays how many games the AI has played
 		game.debug.text("Games Played: " + gamesPlayed, 400, 32, "#fff","16px Arial");
 		if(simulated){
 			game.debug.text("Simulated 10 games", 130, 300,"#fff","32px Arial");
 
 		}
+		//Displays what the AI (Nathaniel) is choosing and whose turn it is
 		else{
 		    if(!turn && gameOver == false){
 		      if(stickschosen == 1){

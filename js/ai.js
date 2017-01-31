@@ -1,10 +1,16 @@
-
+/**
+ * AI contains all functions used by the AI to calculate, save, and update its neural net.
+ */
 
 function AI(){
-    this.floor = 0;
-    this.ceiling = 100;
-    this.smartMap;
+    this.floor = 0;     //The lowest value the neural net percentages can individually reach
+    this.ceiling = 100; //The highest value the neural net percentages can individually reach
+    this.smartMap;      //The model neural net that the AI trains against in simulation
 
+    /**
+     * Initializes the AI neural net with an equal chance of choosing 1, 2, or 3,
+     * and initializes an intelligent model neural net to train against.
+     */
     this.init = function(){
         map = {};
         this.smartMap = {};
@@ -42,6 +48,7 @@ function AI(){
             }
 
         }
+
         //Hard code rules, cannot choose more sticks than are available
         map['2'] = [2, 50, 50, 0];
         map['1'] = [1, 100, 0, 0];
@@ -49,40 +56,28 @@ function AI(){
         this.smartMap['1'] = [1, 100, 0, 0];
 
         Logger.debug(JSON.stringify(this.smartMap));
-
-
     }
 
+    /**
+     * Simulates AI turn being taken, determines the number of sticks to remove based on
+     * its neural net and records the decision.
+     */
     this.takeTurn = function(){
-      quit_btn.inputEnabled = false;
-      Logger.debug('AI taking turn: ', sticksLeft);
+        quit_btn.inputEnabled = false;
+        Logger.debug('AI taking turn: ', sticksLeft);
 
         //Random pick from weighted map of choices
-        var weighted = map[sticksLeft.toString()];
-        var randNum = Math.floor((Math.random() * 100) + 1);
-        var num;
+        var num = this.chooseNum(map[sticksLeft.toString()]);
 
-        Logger.debug('ranges: ', weighted[1], ', ', (weighted[1]+weighted[2]), ', ', (weighted[1]+weighted[2]+weighted[3]), ', num is:', randNum);
-        if(randNum <= weighted[1]){
-            num = 1;
-        }
-        else if((weighted[1] < randNum) && (randNum <= (weighted[1]+weighted[2]))){
-            num = 2;
-        }
-        else if(((weighted[1]+weighted[2]) < randNum) && (randNum <= 100)){
-            num = 3;
-        }
-        else{
-            Logger.error('ERROR: Rand num not in range of percentiles')
-        }
-        stickschosen = num;
         if(num > sticksLeft){
             num = sticksLeft;
             Logger.warn('ERROR: Impossible move chosen, changed');
         }
+        sticksChosen = num; //global variable used in render function
 
         if(!simulation){
-            lag = 1500;
+            //Create time lag if this is againt a real player
+            var lag = 1500;
             setTimeout(function(){
                 moves[sticksLeft.toString()] = num;
                 removeSticks(num);
@@ -96,8 +91,13 @@ function AI(){
 
     }
 
+    /**
+     * Updates the AI's neural net based on its decisions during the previous game
+     * and the results of that game. Also determines change in percentage based on
+     * slider arrow.
+     */
     this.updateAI = function(){
-        var change = slider_arrow.x/7;
+        var change = slider_arrow.x/7; //Get percentage from the slider on screen
         if(playerWin){
             change *= -1; //Decrement values for chosen moves
         }
@@ -115,34 +115,42 @@ function AI(){
                 cur_vals = [];
             }
         }
+
+        //Update HTML table
         $('#excelDataTable').empty();
         buildHtmlTable('#excelDataTable');
 
         gamesPlayed++;
 
         if(simulation){
-           this.trainAI(--simGames);
+           this.trainAI(--simGames); //recursively call trainAI function
         }
     }
 
-    //start_vals is array from map for a specific sticksLeft values
-    //move is the number (1, 2, or 3) that was chosen by the AI
-    //change is the max change value
+    /**
+     * Takes the array corresponding to a specific number of sticks left in the AI neural net and 
+     * updates it.
+     *
+     * @param {[int, int, int, int]} start_vals     an array from map for a specific sticksLeft values
+     * @param {int} moves                           the number (1, 2, or 3) that was chosen by the AI
+     * @param {int} change                          the max change value
+     * @return {[int, int, int, int]} new_vals      an updated array for a specific sticksLeft value
+     */
     this.calculateVals = function(start_vals, move, change){
         var new_vals = start_vals;
 
         //Calculate actual change
         //If the AI won, check against the ceiling, otherwise against the floor
-
         var check = (change > 0) ? this.ceiling : this.floor;
 
 
-        //The change is the lower of either the set change value or the maximum that
-        //can be added or subtracted without making the percentage outside of the floor:ceiling bounds
+        //The change is the lower of either the set change value or the maximum that can be 
+        //added or subtracted without making the percentage outside of the floor:ceiling bounds
         var r_change = (Math.abs(change) < Math.abs(check - start_vals[move])) ? change : (check - start_vals[move]);
         var total = 0;
         var length = start_vals.length;
         var div = 2;
+
         //Check special case rules
         if(start_vals[0] == 1){
             length = 1;
@@ -152,6 +160,7 @@ function AI(){
             div = 1;
         }
 
+        //Loop through the current map percentages and update the two that weren't chosen by the AI
         for(var count = 1; count < length; count++){
             if(count == move) {
                 continue;
@@ -172,18 +181,17 @@ function AI(){
             total += new_vals[count];
         }
 
-        //Make sure move percentages add up to 100
+        //Update the move that was chosen by the AI
         new_vals[move] = Math.floor((100 - total)*100)/100;
+
         return new_vals;
     }
 
     /**
-     * This function is called in order to simulate a given number of games against an
-     * intelligent model. It is called recursively, decrementing the input value by one
-     * each time until the input value is 0.
+     * Triggers simulation of a given number of games against an intelligent model. It 
+     * is called recursively, and stops when the input value is 0.
      *
      * @param {int} num    The number of simulations left to perform
-     *
      */
     this.trainAI = function(num){
         Logger.debug('Simulations left: ', num);
@@ -199,9 +207,8 @@ function AI(){
     }
 
     /**
-     * This function simulates one game for our AI against an intelligent model. When
-     * one game is complete, the updateAI function is called to update our AI's neural
-     * net.
+     * Simulates one game for our AI against an intelligent model. When one game is 
+     * complete, the updateAI function is called to update our AI's neural net.
      */
     this.simulateGame = function(){
         //While statement continues until either the AI or the model wins
@@ -218,26 +225,6 @@ function AI(){
             //Model takes turn based on random pick from weighted smart map of choices
             var num = this.chooseNum(this.smartMap[sticksLeft.toString()]);
             Logger.debug('NUMBER CHOSEN BY SIM: ', num)
-
-            /*var weighted = this.smartMap[sticksLeft.toString()];
-            var randNum = Math.floor((Math.random() * 100) + 1);
-            var num;
-
-            Logger.debug('ranges: ', weighted[1], ', ', (weighted[1]+weighted[2]), ', ', (weighted[1]+weighted[2]+weighted[3]), ', num is:', randNum);
-            if(randNum <= weighted[1]){
-                num = 1;
-            }
-            else if((weighted[1] < randNum) && (randNum <= (weighted[1]+weighted[2]))){
-                num = 2;
-            }
-            else if(((weighted[1]+weighted[2]) < randNum) && (randNum <= 100)){
-                num = 3;
-            }
-
-            Logger.debug('RNG Turn');
-            /*var limit = (sticksLeft < 3) ? sticksLeft : 3;
-            var num = Math.floor((Math.random() * limit) + 1);*/
-
             removeSticks(num);
 
             if(sticksLeft<=0) playerWin = true;
@@ -248,11 +235,16 @@ function AI(){
     }
 
     /**
-     * This function determines the 
+     * This function uses a random number generator and an input weighted map to choose
+     * a number, 1 through 3, which represents the number of sticks to be removed. It is
+     * used by the AI and the model to determine how many sticks to pick up at a given
+     * number of sticks left.
      *
+     * @param {[int, int, int, int]} weighted_map   The weighted map for a given number of sticks
+     * @return int num                              The number (1-3) chosen
      */
     this.chooseNum = function(weighted_map){
-        var randNum = Math.floor((Math.random() * 10000) + 100)/100;
+        var randNum = Math.floor((Math.random() * 10000) + 1)/100;
         var num;
 
         if(randNum <= weighted_map[1]){

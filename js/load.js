@@ -28,7 +28,6 @@ var loadState = {
 	},
 
 	create: function() {
-		game.state.start('menu');
 
 		$('#excelDataTable').hide();
 
@@ -48,6 +47,8 @@ var loadState = {
 		map['1'] = [1, 100, 0, 0];
 
 		sticksLeft = startingSticks;
+		
+		game.state.start('menu');
 
 		/*$('#excelDataTable').empty();
 		buildHtmlTable('#excelDataTable');*/
